@@ -1,0 +1,127 @@
+.hidden {
+  display: none;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Cormorant Garamond", serif;
+  padding: 0.5em 0;
+}
+
+* {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+#errorText {
+  color: red;
+}
+
+#userInfo {
+  color: rgb(215, 215, 215);
+  padding: 1rem;
+}
+
+buttons {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 0.5rem;
+}
+
+.invisible {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+.invisible:hover {
+  font-weight: bolder;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+input {
+  accent-color: green;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  background-color: rgb(241, 241, 241);
+  padding: 1rem 1rem;
+  width: 95%;
+  border-radius: 4px;
+  border: 1px solid rgb(231, 231, 231);
+}
+@media (width >= 576px) {
+  input[type=text], input[type=password], input[type=email] {
+    width: 50%;
+  }
+}
+
+.bookThumbnail {
+  max-width: 200px;
+}
+
+#pagewrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#contentWrapper {
+  flex-grow: 1;
+  padding: 1rem 1rem;
+  max-width: 1000px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+header {
+  padding: 1rem;
+  box-shadow: 0px 0px 13px gray;
+}
+header nav {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+
+#user {
+  text-align: right;
+  padding: 0.5rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+footer {
+  padding: 1rem;
+  color: white;
+  background-color: rgb(101, 94, 89);
+}
+
+#login-container {
+  border-radius: 1rem;
+}
+
+.bookContainer {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  max-width: 450px;
+}
+.card .text {
+  padding: 0 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}/*# sourceMappingURL=style.css.map */
