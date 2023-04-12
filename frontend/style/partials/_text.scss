@@ -1,6 +1,6 @@
 h1,h2,h3,h4,h5 {
     font-family: 'Cormorant Garamond', serif;
-    padding: 0.5em 0;
+    padding: 0.5em 0 0 0;
 }
 
 * {
@@ -12,4 +12,17 @@ h1,h2,h3,h4,h5 {
 #userInfo {
     color: rgb(215, 215, 215);
     padding: 1rem;
+}
+p {
+    padding: 0.5rem 0;
+}
+
+.author {
+    color: grey;
+}
+.grade {
+    color: rgb(199, 199, 199);
+}
+.color {
+    color: rgb(72, 66, 57);
 }

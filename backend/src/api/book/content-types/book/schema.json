@@ -4,7 +4,8 @@
   "info": {
     "singularName": "book",
     "pluralName": "books",
-    "displayName": "book"
+    "displayName": "book",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -21,14 +22,18 @@
       "type": "integer"
     },
     "grade": {
-      "type": "integer"
+      "type": "decimal"
     },
     "coverImg": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "releaseDate": {
+      "type": "date"
     }
   }
 }
