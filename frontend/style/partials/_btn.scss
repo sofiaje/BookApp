@@ -11,13 +11,11 @@ button {
 //add to readinglist
 .addBtn {
     background-color: rgba(0,0,0,0);
-    border: solid rgb(199, 199, 199);
-    // border-width: 1px 2px 2px 1px;
+    color:rgb(95, 95, 95);
+
     border: none;
-    border-radius: 0.5rem;
     align-self: flex-start;
     &:hover{
-        // border-width: 2px 1px 1px 2px;
         color: rgb(165, 165, 165);
     }
 }
@@ -31,16 +29,14 @@ button {
 }
 
 .startBtn{
-    background-color: rgb(100, 100, 100);
-    background-color: rgb(4, 114, 70);
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
     font-weight: 100;
-    color: white;
     color: black;
     margin-top: 2.5rem;
     padding: 1rem 2rem;
     font-size: 1rem;
     border: 1px solid;
+    border-radius: 4px;
     &:hover {
         // background-color: lightgray;
         box-shadow: 0 0 10px 5px rgba(221, 221, 221, 0.731);

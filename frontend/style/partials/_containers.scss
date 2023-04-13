@@ -24,6 +24,11 @@ header{
     }
 }
 
+.container {
+    max-width: 1400px;
+    margin-inline: auto;
+}
+
 #user {
     text-align: right;
     padding:0.5rem
@@ -89,10 +94,16 @@ footer {
 
 .bookContainer {
     display: flex;
-    gap: 2rem;
+    // justify-content: space-between;
+    gap: 3rem;
     flex-wrap: wrap;
+
+    // if scrollable sideways 
+    // overflow: auto;
+    // white-space: nowrap;
     margin: 1rem;
     padding-bottom: 2rem;
+    
 }
 .card {
     display: flex;

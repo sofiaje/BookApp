@@ -1,6 +1,34 @@
 TODO
 
-- add book in readinglist
-- remove book from reading list
-
+(G)
 - fix grading system
+
+
+(VG)
+- choose between two diffrent color styles
+- list with all the books user has graded
+- make list sortable by name, name of author, grade (from highest down)
+
+
+
+-------------------------------------------------------------------------
+Projektrapport (VG)
+Vilka är Strapi CMS främsta styrkor?
+
+Vilka är Strapi CMS svagheter?
+
+Vad hade varit orsaker att använda ett annat CMS än Strapi i detta projekt, 
+och vilka CMS du hade kunnat använda dig av istället? Ge minst tre exempel. 
+(T.ex Exempel 1:"Om jag hade velat utöka projektet med X funktionalitet, 
+hade CMS Y lämpat sig bättre p.g.a inbyggda funktionalitet etc.")?
+
+Hur har din erfarenhet varit med att jobba med Strapi i detta projekt?
+
+
+
+-------------------------------------------------------------------------
+Questions / notes
+
+- Tab order on page ( navigation )
+- Filling text on login-page
+- Filling text on profile-page
