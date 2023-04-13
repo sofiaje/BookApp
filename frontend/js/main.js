@@ -1,3 +1,8 @@
+import { logout, login } from "./login.js"
+import { renderReadList, addToList, updateGrade } from "./cards.js"
+import { getData, changeNav } from "./helpers.js"
+
+
 let contentWrapper = document.getElementById("contentWrapper")
 
 let errorText
@@ -11,7 +16,6 @@ let passwReg
 
 const loginBtn = document.getElementById("loginBtn")
 const mypageBtn = document.getElementById("mypageBtn")
-const logoutBtn = document.getElementById("logoutBtn")
 
 const userInfo = document.getElementById("userInfo")
 
@@ -24,10 +28,11 @@ document.getElementById("homeBtn").addEventListener("click", () => {
 
 
 
-// ------------------------------ login / register ------------------------------------
+// ------------------------------ login  ------------------------------------
 
+loginBtn.addEventListener("click", loginpage)
 
-loginBtn.addEventListener("click", () => {
+async function loginpage() {
     contentWrapper.innerHTML = `
     <div id="login-container">
         <h2>Login</h2>
@@ -43,7 +48,7 @@ loginBtn.addEventListener("click", () => {
 
             <input type="submit" class="btn" value="Login"><br>
         </form>
-        <button class="invisible" onclick="toggleVis()">Not yet a member? Register here</button>
+        <button class="invisible" id="toReg">Not yet a member? Register here</button>
     </div>
     
     <div id="register-container" class="hidden">
@@ -60,14 +65,21 @@ loginBtn.addEventListener("click", () => {
 
             <input type="submit" class="btn" value="Register"><br>
         </form>
-        <button class="invisible" onclick="toggleVis()"><i class="fa-solid fa-arrow-left-long"></i> Back to login</button>
+        <button class="invisible" id="backToLog"><i class="fa-solid fa-arrow-left-long"></i> Back to login</button>
     </div>
     
     <p id="errorText"></p>`
 
     errorText = document.getElementById("errorText")
 
-    document.getElementById("loginform").addEventListener("submit", (e) => {
+
+    //toggla mellan login form och register form
+    document.getElementById("toReg").addEventListener("click", toggleVis)
+    document.getElementById("backToLog").addEventListener("click", toggleVis)
+
+
+    //När man trycker på logga in knapp
+    document.getElementById("loginform").addEventListener("submit", async (e) => {
         e.preventDefault()
 
         inputName = document.getElementById("inputName")
@@ -75,12 +87,15 @@ loginBtn.addEventListener("click", () => {
         if (!inputName.value || !passw.value) {
             errorText.innerHTML = `Please make sure all fields are filled in correctly`
         } else {
-            login(inputName.value, passw.value)
-
+            let data = await login(inputName, passw)
+            if (data) {
+                signedIn(data);
+            }
         }
-
     })
 
+
+    //När man trycker på registrera knapp
     document.getElementById("regform").addEventListener("submit", (e) => {
         e.preventDefault()
 
@@ -95,7 +110,15 @@ loginBtn.addEventListener("click", () => {
             registerUser(inputNameReg.value, emailReg.value, passwReg.value)
         }
     })
-})
+}
+
+//log out
+document.getElementById("logoutBtn").addEventListener("click", logout)
+
+
+
+
+// ------------------------------ toggle / register / login  ------------------------------------
 
 //toggle register / login visability
 function toggleVis() {
@@ -105,25 +128,6 @@ function toggleVis() {
 }
 
 
-// login function
-async function login(user, passw) {
-    try {
-        let res = await axios.post("http://localhost:1337/api/auth/local", {
-            identifier: user,
-            password: passw
-        })
-        signedIn(res.data);
-
-        inputName.value = ""
-        passw.value = ""
-        console.log("det gick bra va! ")
-
-    } catch (error) {
-        console.log(error)
-        errorText.innerText = `${error.response.data.error.message}`
-        console.log("det gick dåligt va! ")
-    }
-}
 
 // function to register as new user
 async function registerUser(user, email, passw) {
@@ -142,6 +146,10 @@ async function registerUser(user, email, passw) {
     }
 }
 
+
+// ------------------------------ save local storage ------------------------------------
+
+
 //function that saves userdata in localstorage or sessionstorage depending on checkbox-status
 function signedIn(data) {
     const remember = document.getElementById("remember")
@@ -157,63 +165,97 @@ function signedIn(data) {
     renderMyPage()
 }
 
-// function to log out user
-function logout() {
-    sessionStorage.clear()
-    localStorage.clear()
-    location.reload()
-}
-
-logoutBtn.addEventListener("click", () => {
-    logout()
-})
 
 
-// ------------------------------ my page ------------------------------------
+// ------------------------------ render my page --------------------------------------------
 
 mypageBtn.addEventListener("click", () => {
     renderMyPage()
 })
 
-async function renderMyPage() {
-    setUsername()
-    changeNav()
-    contentWrapper.innerHTML = `<h2>Profile page</h2>
-    <h3>Reading list</h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, dolorum!</p>
-    <h3>Rated books</h3>
-    <p>Lorem ipsum dolor sit amet consectetur.</p>`
-
-}
 
 async function setUsername() {
     if (!me) {
-        me = await getData("http://localhost:1337/api/users/me")
+        me = await getData("http://localhost:1337/api/users/me?populate=deep")
     }
     userInfo.innerHTML = `logged in as ${me.username}`
+    return me
 }
 
 
 
-// ------------------------------ helper functions -----------------------------
-
-async function getData(url) {
-    let res = await axios.get(url, {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
-        }
+async function renderMyPage() {
+    // console.log("render my page 177")
+    me = await setUsername()
+    changeNav()
+    
+    contentWrapper.innerHTML = `<h2>Profile page</h2>
+    <h3>Reading list</h3>
+    <div class="bookContainer"></div><br>
+    <h3>Rated books</h3>
+    <div id="gradedWrapper"></div>`
+    
+    console.log("books", me)
+    
+    me.books?.forEach(book => {
+        // console.log(book)
+        renderReadList(book)
     })
-    return res.data
 }
 
-function changeNav() {
-    mypageBtn.classList.remove("hidden")
-    loginBtn.classList.add("hidden")
-    logoutBtn.classList.remove("hidden")
-}
+
 
 
 // ------------------------------ load page ------------------------------------
+
+
+function bookCard(obj) {
+    // console.log(obj)
+    let { title, author, pages, releaseDate, grade, coverImg } = obj.attributes
+
+    let card = document.createElement("div");
+    card.classList.add("card")
+    card.innerHTML = `
+        <img src="http://localhost:1337${coverImg.data.attributes.url}" class="bookThumbnail" alt="bookcover">`
+
+    
+    let textDiv = document.createElement("div")
+    textDiv.classList.add("text")
+    textDiv.innerHTML = `<div>
+        <h3>${title}</h3>
+        <p class="author">by ${author}</p>
+        <span class="grade">
+        <i class="fa-solid fa-star ${1 <= grade ? "color" : ""}"></i>
+        <i class="fa-solid fa-star ${2 <= grade ? "color" : ""}"></i>
+        <i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i>
+        <i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i>
+        <i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></span>
+        ${grade === null ? "no grades" : grade} 
+
+        <p>Pages: ${pages}<br>
+        Relese date: ${releaseDate}</p>
+    </div>`
+
+
+    let btn = document.createElement("button")
+    btn.classList.add("btn", "addBtn")
+    btn.innerText = "Add to reading list"
+    textDiv.append(btn)
+
+    card.append(textDiv)
+        
+    btn.addEventListener("click", () => {
+        if (addToList(obj.id)) {
+            loginpage()
+        }
+    })
+
+    document.querySelector(".bookContainer").append(card)
+}
+
+
+
+
 
 async function loadPage() {
     if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
@@ -222,46 +264,19 @@ async function loadPage() {
     }
 
     let res = await axios.get("http://localhost:1337/api/books?populate=*");
-    console.log(res.data.data)
+    console.log(res.data)
 
     contentWrapper.innerHTML = `<h2>Books</h2>
             <div class="bookContainer">
             </div>`
-            
+
     res.data.data.forEach(book => {
         bookCard(book)
     });
 }
 
-function bookCard(obj) {
-    console.log(obj)
-    let { title, author, pages, releaseDate, grade, coverImg } = obj.attributes
-    let img = coverImg.data.attributes.url
-    let card = document.createElement("div");
-    card.classList.add("card")
-    card.innerHTML = `
-        <img src="http://localhost:1337${img}" class="bookThumbnail" alt="bookcover">
-        <div class="text">
-            <div>
-                <h3>${title}</h3>
-                <p class="author">av ${author}</p>
-                <span class="grade">
-                <i class="fa-solid fa-star ${1 <= grade ? "color" : ""}"></i>
-                <i class="fa-solid fa-star ${2 <= grade ? "color" : ""}"></i>
-                <i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i>
-                <i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i>
-                <i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></span>
-                ${grade === null ? "no grades" : grade} 
-            
-                <p>Pages: ${pages}<br>
-                Relese date: ${releaseDate}</p>
-            </div>
-            <button class="btn addBtn" onclick="addToList(${obj.id})">Add to reading list</button>
-        </div>`
-    document.querySelector(".bookContainer").append(card)
-}
 
-function addToList(id) {
-    console.log("hej, bok nr " + id)
-}
+
+
+
 loadPage()

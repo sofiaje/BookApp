@@ -1,0 +1,5 @@
+TODO
+
+- fix add to reading list
+- fix grading system
+- fix register form

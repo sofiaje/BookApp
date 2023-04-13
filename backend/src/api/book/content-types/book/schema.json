@@ -34,6 +34,12 @@
     },
     "releaseDate": {
       "type": "date"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "books"
     }
   }
 }
