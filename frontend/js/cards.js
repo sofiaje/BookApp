@@ -1,6 +1,7 @@
-export function renderReadList(obj) {
-    console.log(obj)
+import { addAPI } from "./api.js"
 
+
+export function renderReadList(obj) {
     let { title, author, grade, pages, releaseDate, coverImg } = obj
     
     let card = document.createElement("div")
@@ -41,18 +42,30 @@ export function renderReadList(obj) {
 
 
 
-export function addToList(id) {
+export async function addToList(id) {
     if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
         console.log("lägg till bok nr " + id + " på läslistan")
+
+        let res = await axios.get("http://localhost:1337/api/users/me?populate=deep", {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+            }
+        })
+        console.log(res.data.id)
+        let arr = res.data.books
+        arr = arr.map(x => x.id)
+
+        arr.push(id)
+        addAPI(arr, res.data.id)
+        
+        return true
     } else {
         alert("du behöver vara medlem för att kunna lägga till bok")
-        return true
+        return false
     }
 }
 
-async function removeFromList(id) {
-    
-}
+
 
 export function updateGrade(id, grade) {
     if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {

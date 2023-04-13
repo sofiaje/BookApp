@@ -1,5 +1,3 @@
-
-
 export async function getData(url) {
     let res = await axios.get(url, {
         headers: {

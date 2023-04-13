@@ -30,7 +30,14 @@ document.getElementById("homeBtn").addEventListener("click", () => {
 
 // ------------------------------ login  ------------------------------------
 
+//login
 loginBtn.addEventListener("click", loginpage)
+
+//log out
+document.getElementById("logoutBtn").addEventListener("click", logout)
+
+
+
 
 async function loginpage() {
     contentWrapper.innerHTML = `
@@ -112,8 +119,7 @@ async function loginpage() {
     })
 }
 
-//log out
-document.getElementById("logoutBtn").addEventListener("click", logout)
+
 
 
 
@@ -185,7 +191,6 @@ async function setUsername() {
 
 
 async function renderMyPage() {
-    // console.log("render my page 177")
     me = await setUsername()
     changeNav()
     
@@ -195,10 +200,8 @@ async function renderMyPage() {
     <h3>Rated books</h3>
     <div id="gradedWrapper"></div>`
     
-    console.log("books", me)
     
     me.books?.forEach(book => {
-        // console.log(book)
         renderReadList(book)
     })
 }
@@ -210,7 +213,6 @@ async function renderMyPage() {
 
 
 function bookCard(obj) {
-    // console.log(obj)
     let { title, author, pages, releaseDate, grade, coverImg } = obj.attributes
 
     let card = document.createElement("div");
@@ -244,16 +246,15 @@ function bookCard(obj) {
 
     card.append(textDiv)
         
-    btn.addEventListener("click", () => {
-        if (addToList(obj.id)) {
+    btn.addEventListener("click", async () => {
+        let loggedin = await addToList(obj.id)
+        if (!loggedin) {
             loginpage()
         }
     })
 
     document.querySelector(".bookContainer").append(card)
 }
-
-
 
 
 
@@ -264,7 +265,6 @@ async function loadPage() {
     }
 
     let res = await axios.get("http://localhost:1337/api/books?populate=*");
-    console.log(res.data)
 
     contentWrapper.innerHTML = `<h2>Books</h2>
             <div class="bookContainer">

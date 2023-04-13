@@ -1,5 +1,6 @@
 TODO
 
-- fix add to reading list
+- add book in readinglist
+- remove book from reading list
+
 - fix grading system
-- fix register form

@@ -1,5 +1,3 @@
-
-
 // function to log out user
 export function logout() {
     sessionStorage.clear()
