@@ -1,3 +1,10 @@
 .bookThumbnail{
     max-width: 150px;
 }
+
+.bigImg{
+    width: 100%;
+    @media ($lg){
+        width: 50%;
+    }
+}

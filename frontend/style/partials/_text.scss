@@ -3,13 +3,30 @@ h1,h2,h3,h4,h5 {
     padding: 0.5em 0 0 0;
 }
 
+
 * {
     font-family: 'Source Sans Pro', sans-serif;
 }
+
 p {
     padding: 0.5rem 0;
 }
 
+.bigText {
+    width: 50%;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+    @media ($sm){
+        font-size: 2rem;
+    }
+}
+
+// h2 heading in loginform
+.head {
+    padding: 2rem 0;
+    font-size: 2rem;
+}
 
 // error log in /register
 #errorText {

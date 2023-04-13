@@ -6,14 +6,7 @@ import { setUsername, renderMyPage } from "./mypage.js"
 
 
 
-let errorText
-let allBooks
-let inputName
-let passw
-let inputNameReg
-let emailReg
-let passwReg
-
+let errorText, allBooks, inputName, passw, inputNameReg, emailReg, passwReg
 
 let contentWrapper = document.getElementById("contentWrapper")
 
@@ -40,8 +33,8 @@ document.getElementById("mypageBtn").addEventListener("click", renderMyPage)
 
 async function loginpage() {
     contentWrapper.innerHTML = `
-    <div id="login-container">
-        <h2>Login</h2>
+    <div id="login-container" class="p-1">
+        <h2 class="head">Login</h2>
         <form action="" id="loginform">
             <label for="inputName">Username or email</label><br>
             <input type="text" id="inputName"><br>
@@ -49,16 +42,20 @@ async function loginpage() {
             <label for="passw">Password</label><br>
             <input type="password" id="passw"><br>
 
-            <input type="checkbox" id="remember">
-            <label for="remember">Remember me</label><br>
+            <div class="flex max">
+                <div>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <a class="navLink" id="toReg">Not yet a member? Register here</a>
+            </div><br>
 
             <input type="submit" class="btn" value="Login"><br>
         </form>
-        <button class="invisible" id="toReg">Not yet a member? Register here</button>
     </div>
     
-    <div id="register-container" class="hidden">
-        <h2>Create account</h2>
+    <div id="register-container" class="hidden p-1">
+        <h2 class="head">Create account</h2>
         <form action="" id="regform">
             <label for="inputNameReg">Username</label><br>
             <input type="text" id="inputNameReg"><br>
@@ -74,7 +71,7 @@ async function loginpage() {
         <button class="invisible" id="backToLog"><i class="fa-solid fa-arrow-left-long"></i> Back to login</button>
     </div>
     
-    <p id="errorText"></p>`
+    <p id="errorText" class="p-1"></p>`
 
     errorText = document.getElementById("errorText")
 
@@ -96,6 +93,7 @@ async function loginpage() {
             let data = await login(inputName, passw)
             if (data) {
                 signedIn(data);
+                renderMyPage()
             }
         }
     })
@@ -116,6 +114,7 @@ async function loginpage() {
             let data = await registerUser(inputNameReg.value, emailReg.value, passwReg.value)
             if (data) {
                 signedIn(data);
+                renderMyPage()
             }
         }
     })
@@ -129,10 +128,6 @@ async function loginpage() {
 
 
 async function loadPage() {
-    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
-        changeNav()
-        setUsername()
-    }
 
     // ändra vid betygsättning, behöver då alltid hämta nytt data för att få senaste uppdateringen?
     if (allBooks === undefined) {
@@ -142,13 +137,46 @@ async function loadPage() {
     }
 
 
-    contentWrapper.innerHTML = `<h2>Our Books</h2>
-            <div class="bookContainer">
-            </div>`
 
-        allBooks.forEach(book => {
+    contentWrapper.innerHTML = `
+    <div class="firstpageContainer">
+        <img src="assets/bookcovers/mag.jpg" class="bigImg" alt="pile of books">
+        <div class="bigText">
+            <h1>Keep track of<br> your reading</h1>
+            <button class="btn startBtn" id="startBtn">Start now</button>
+        </div>
+    </div>
+    <div class="firstpageInfo">
+        <article>
+            <h2>About us</h2>
+            <p>LitRate is an innovative mobile app that allows users to rate and review a carefully curated selection of books and create personalized reading lists. Our small company is dedicated to providing a platform that is easy to use, visually appealing, and fosters a sense of community among readers.</p>
+        </article>
+        <article>
+            <h2>How does it work?</h2>
+            <p>With LitRate, you can easily discover new books based on your interests and share your thoughts and opinions with other book lovers. Whether you're an avid reader or just looking for your next great read, LitRate is the perfect app for you.</p>
+        </article>
+        <article>
+            <h2>The books</h2>
+            <p>Earum harum obcaecati reiciendis ex deserunt est sed in excepturi fugit voluptatum.</p>
+        </article>
+    </div>
+        
+    <h2 class="p-1">Our selection</h2>
+    <div class="bookContainer">
+    </div>`
+
+    allBooks.forEach(book => {
         bookCard(book)
     });
+
+    document.getElementById("startBtn").addEventListener("click", loginpage)
+
+    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
+        changeNav()
+        setUsername()
+        document.querySelector(".firstpageContainer").classList.add("hidden")
+        document.querySelector(".firstpageInfo").classList.add("hidden")
+    }
 }
 
 
@@ -170,7 +198,7 @@ function bookCard(obj) {
         <i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i>
         <i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i>
         <i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></span>
-        ${grade === null ? "no grades" : grade} 
+        ${grade === null ? "" : grade} 
 
         <p>Pages: ${pages}<br>
         Relese date: ${releaseDate}</p>
@@ -178,11 +206,11 @@ function bookCard(obj) {
 
     let btn = document.createElement("button")
     btn.classList.add("btn", "addBtn")
-    btn.innerText = "Add to reading list"
-    textDiv.append(btn)
+    btn.innerHTML = `<i class="fa-regular fa-bookmark fa-xl"></i>`
 
-    card.append(textDiv)
-        
+    card.append(textDiv, btn)
+
+
     btn.addEventListener("click", async () => {
         let loggedin = await addToList(obj.id)
         if (!loggedin) {

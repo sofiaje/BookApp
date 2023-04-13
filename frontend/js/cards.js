@@ -20,7 +20,7 @@ export function renderReadList(obj) {
             <i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i>
             <i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i>
             <i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></span>
-            ${grade === null ? "no grades" : grade} 
+            ${grade === null ? "" : grade} 
     
             <p>Pages: ${pages}<br>
             Relese date: ${releaseDate}</p>
@@ -28,10 +28,9 @@ export function renderReadList(obj) {
     
     let btn = document.createElement("button")
     btn.classList.add("btn", "addBtn")
-    btn.innerText = "Remove from list"
-    textDiv.append(btn)
+    btn.innerHTML = `<i class="fa-solid fa-xmark fa-xl"></i>`
 
-    card.append(textDiv)
+    card.append(textDiv, btn)
 
     btn.addEventListener("click", () => {
         console.log(`ta bort bok nr ${obj.id}`)

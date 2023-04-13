@@ -1,7 +1,3 @@
-import { renderMyPage } from "./mypage.js"
-
-
-
 // function to register as new user
 export async function registerUser(user, email, passw) {
     try {
@@ -55,8 +51,6 @@ export function signedIn(data) {
         sessionStorage.setItem("user", data.user.username)
         sessionStorage.setItem("jwt", data.jwt)
     }
-    errorText.innerText = ``
-    renderMyPage()
 }
 
 

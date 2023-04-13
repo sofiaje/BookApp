@@ -11,17 +11,15 @@ export async function setUsername() {
 
 
 export async function renderMyPage() {
-    // let me = await setUsername()
     let me = await getData("http://localhost:1337/api/users/me?populate=deep")
-
 
     setUsername()
     changeNav()
     
-    contentWrapper.innerHTML = `<h2>Profile page</h2>
-    <h3>Reading list</h3>
+    contentWrapper.innerHTML = `
+    <h2 class="p-1">Reading list</h2>
     <div class="bookContainer"></div><br>
-    <h3>Rated books</h3>
+    <h2 class="p-1">Rated books</h2>
     <div id="gradedWrapper"></div>`
     
     

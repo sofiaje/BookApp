@@ -2,6 +2,14 @@
   display: none;
 }
 
+div.hidden {
+  display: none;
+}
+
+.p-1 {
+  padding: 0 1rem;
+}
+
 h1, h2, h3, h4, h5 {
   font-family: "Cormorant Garamond", serif;
   padding: 0.5em 0 0 0;
@@ -13,6 +21,23 @@ h1, h2, h3, h4, h5 {
 
 p {
   padding: 0.5rem 0;
+}
+
+.bigText {
+  width: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+@media (width >= 576px) {
+  .bigText {
+    font-size: 2rem;
+  }
+}
+
+.head {
+  padding: 2rem 0;
+  font-size: 2rem;
 }
 
 #errorText {
@@ -34,33 +59,6 @@ p {
 
 .color {
   color: rgb(83, 76, 66);
-}
-
-button {
-  cursor: pointer;
-}
-
-.btn {
-  padding: 0.5rem;
-}
-
-.addBtn {
-  background-color: white;
-  border: solid rgb(199, 199, 199);
-  border-width: 1px 2px 2px 1px;
-  border-radius: 0.5rem;
-  align-self: flex-end;
-}
-.addBtn:hover {
-  border-width: 2px 1px 1px 2px;
-}
-
-.invisible {
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-}
-.invisible:hover {
-  font-weight: bolder;
 }
 
 .navLink {
@@ -86,14 +84,66 @@ input[type=text], input[type=password], input[type=email] {
   border-radius: 4px;
   border: 1px solid rgb(231, 231, 231);
 }
-@media (width >= 576px) {
+@media (width >= 768px) {
   input[type=text], input[type=password], input[type=email] {
     width: 50%;
   }
 }
 
+button {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 0.5rem;
+}
+
+.addBtn {
+  background-color: rgba(0, 0, 0, 0);
+  border: solid rgb(199, 199, 199);
+  border: none;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+}
+.addBtn:hover {
+  color: rgb(165, 165, 165);
+}
+
+.invisible {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+.invisible:hover {
+  font-weight: bolder;
+}
+
+.startBtn {
+  background-color: rgb(100, 100, 100);
+  background-color: rgb(4, 114, 70);
+  background-color: white;
+  font-weight: 100;
+  color: white;
+  color: black;
+  margin-top: 2.5rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: 1px solid;
+}
+.startBtn:hover {
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 0.731);
+}
+
 .bookThumbnail {
   max-width: 150px;
+}
+
+.bigImg {
+  width: 100%;
+}
+@media (width >= 992px) {
+  .bigImg {
+    width: 50%;
+  }
 }
 
 #pagewrapper {
@@ -104,7 +154,6 @@ input[type=text], input[type=password], input[type=email] {
 
 #contentWrapper {
   flex-grow: 1;
-  padding: 1rem 1rem;
   max-width: 1300px;
   width: 100%;
   margin-inline: auto;
@@ -132,30 +181,77 @@ header nav {
   align-items: baseline;
 }
 
+.max {
+  width: 95%;
+}
+@media (width >= 768px) {
+  .max {
+    width: 50%;
+  }
+}
+
+.firstpageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+@media (width >= 768px) {
+  .firstpageContainer {
+    margin-bottom: 4rem;
+  }
+}
+@media (width >= 992px) {
+  .firstpageContainer {
+    flex-direction: row;
+  }
+}
+
+.firstpageInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+.firstpageInfo article {
+  max-width: 600px;
+  padding: 1rem;
+  width: 100%;
+}
+@media (width >= 768px) {
+  .firstpageInfo {
+    gap: 2rem;
+    font-size: 1.2rem;
+  }
+}
+@media (width >= 992px) {
+  .firstpageInfo {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
 footer {
   padding: 1rem;
   color: white;
   background-color: rgb(101, 94, 89);
 }
 
-#login-container {
-  border-radius: 1rem;
-}
-
 .bookContainer {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  margin: 1rem 0;
+  margin: 1rem;
+  padding-bottom: 2rem;
 }
 
 .card {
-  background-color: white;
   display: flex;
-  padding: 1rem;
-  box-shadow: 0 0 10px 5px rgb(231, 231, 231);
+  padding-top: 1rem;
+  border-top: 1px solid rgb(205, 205, 205);
   width: 100%;
-  max-width: 400px;
 }
 .card .text {
   width: 100%;
@@ -164,6 +260,16 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+}
+@media (width >= 768px) {
+  .card {
+    width: 45%;
+  }
+}
+@media (width >= 1200px) {
+  .card {
+    width: 30%;
+  }
 }
 
 * {
