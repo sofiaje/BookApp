@@ -11,6 +11,10 @@ h1, h2, h3, h4, h5 {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+p {
+  padding: 0.5rem 0;
+}
+
 #errorText {
   color: red;
 }
@@ -18,10 +22,6 @@ h1, h2, h3, h4, h5 {
 #userInfo {
   color: rgb(215, 215, 215);
   padding: 1rem;
-}
-
-p {
-  padding: 0.5rem 0;
 }
 
 .author {
@@ -60,6 +60,14 @@ button {
   border: none;
 }
 .invisible:hover {
+  font-weight: bolder;
+}
+
+.navLink {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.navLink:hover {
   font-weight: bolder;
 }
 

@@ -1,12 +1,13 @@
-import { logout, login } from "./login.js"
+import { registerUser, logout, login, signedIn, toggleVis } from "./login.js"
 import { renderReadList, addToList, updateGrade } from "./cards.js"
-import { getData, changeNav } from "./helpers.js"
+import { changeNav } from "./nav.js"
+// import { getData } from "./api.js"
+import { setUsername, renderMyPage } from "./mypage.js"
 
 
-let contentWrapper = document.getElementById("contentWrapper")
 
 let errorText
-let me
+let allBooks
 let inputName
 let passw
 let inputNameReg
@@ -14,30 +15,28 @@ let emailReg
 let passwReg
 
 
-const loginBtn = document.getElementById("loginBtn")
-const mypageBtn = document.getElementById("mypageBtn")
+let contentWrapper = document.getElementById("contentWrapper")
 
-const userInfo = document.getElementById("userInfo")
 
-// nav
-document.getElementById("homeBtn").addEventListener("click", () => {
-    loadPage()
-})
 
+// ------------------------------ nav  ---------------------------------------
+
+// home
+document.getElementById("homeBtn").addEventListener("click", loadPage)
+
+// sign in / register
+document.getElementById("loginBtn").addEventListener("click", loginpage)
+
+// log out
+document.getElementById("logoutBtn").addEventListener("click", logout)
+
+// my page
+document.getElementById("mypageBtn").addEventListener("click", renderMyPage)
 
 
 
 
 // ------------------------------ login  ------------------------------------
-
-//login
-loginBtn.addEventListener("click", loginpage)
-
-//log out
-document.getElementById("logoutBtn").addEventListener("click", logout)
-
-
-
 
 async function loginpage() {
     contentWrapper.innerHTML = `
@@ -80,12 +79,12 @@ async function loginpage() {
     errorText = document.getElementById("errorText")
 
 
-    //toggla mellan login form och register form
+    //toggle between login form and register form
     document.getElementById("toReg").addEventListener("click", toggleVis)
     document.getElementById("backToLog").addEventListener("click", toggleVis)
 
 
-    //När man trycker på logga in knapp
+    // log in button
     document.getElementById("loginform").addEventListener("submit", async (e) => {
         e.preventDefault()
 
@@ -102,8 +101,8 @@ async function loginpage() {
     })
 
 
-    //När man trycker på registrera knapp
-    document.getElementById("regform").addEventListener("submit", (e) => {
+    // register button
+    document.getElementById("regform").addEventListener("submit", async (e) => {
         e.preventDefault()
 
         inputNameReg = document.getElementById("inputNameReg")
@@ -114,7 +113,10 @@ async function loginpage() {
             errorText.innerHTML = `Please make sure all fields are filled in correctly`
 
         } else {
-            registerUser(inputNameReg.value, emailReg.value, passwReg.value)
+            let data = await registerUser(inputNameReg.value, emailReg.value, passwReg.value)
+            if (data) {
+                signedIn(data);
+            }
         }
     })
 }
@@ -123,93 +125,31 @@ async function loginpage() {
 
 
 
-
-// ------------------------------ toggle / register / login  ------------------------------------
-
-//toggle register / login visability
-function toggleVis() {
-    document.getElementById("register-container").classList.toggle("hidden")
-    document.getElementById("login-container").classList.toggle("hidden")
-    errorText.innerText = ""
-}
+// ------------------------------ load first page ------------------------------------
 
 
-
-// function to register as new user
-async function registerUser(user, email, passw) {
-    try {
-        let res = await axios.post("http://localhost:1337/api/auth/local/register", {
-            username: user,
-            email: email,
-            password: passw
-        })
-        signedIn(res.data);
-        inputNameReg.value = ""
-        emailReg.value = ""
-        passwReg.value = ""
-    } catch (error) {
-        errorText.innerText = `${error.response.data.error.message}`
+async function loadPage() {
+    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
+        changeNav()
+        setUsername()
     }
-}
 
-
-// ------------------------------ save local storage ------------------------------------
-
-
-//function that saves userdata in localstorage or sessionstorage depending on checkbox-status
-function signedIn(data) {
-    const remember = document.getElementById("remember")
-
-    if (remember.checked) {
-        localStorage.setItem("user", data.user.username)
-        localStorage.setItem("jwt", data.jwt)
-    } else {
-        sessionStorage.setItem("user", data.user.username)
-        sessionStorage.setItem("jwt", data.jwt)
+    // ändra vid betygsättning, behöver då alltid hämta nytt data för att få senaste uppdateringen?
+    if (allBooks === undefined) {
+        let res = await axios.get("http://localhost:1337/api/books?populate=*");
+        allBooks = res.data.data
+        console.log("fetch books / not logged in")
     }
-    errorText.innerText = ``
-    renderMyPage()
+
+
+    contentWrapper.innerHTML = `<h2>Our Books</h2>
+            <div class="bookContainer">
+            </div>`
+
+        allBooks.forEach(book => {
+        bookCard(book)
+    });
 }
-
-
-
-// ------------------------------ render my page --------------------------------------------
-
-mypageBtn.addEventListener("click", () => {
-    renderMyPage()
-})
-
-
-async function setUsername() {
-    if (!me) {
-        me = await getData("http://localhost:1337/api/users/me?populate=deep")
-    }
-    userInfo.innerHTML = `logged in as ${me.username}`
-    return me
-}
-
-
-
-async function renderMyPage() {
-    me = await setUsername()
-    changeNav()
-    
-    contentWrapper.innerHTML = `<h2>Profile page</h2>
-    <h3>Reading list</h3>
-    <div class="bookContainer"></div><br>
-    <h3>Rated books</h3>
-    <div id="gradedWrapper"></div>`
-    
-    
-    me.books?.forEach(book => {
-        renderReadList(book)
-    })
-}
-
-
-
-
-// ------------------------------ load page ------------------------------------
 
 
 function bookCard(obj) {
@@ -217,10 +157,8 @@ function bookCard(obj) {
 
     let card = document.createElement("div");
     card.classList.add("card")
-    card.innerHTML = `
-        <img src="http://localhost:1337${coverImg.data.attributes.url}" class="bookThumbnail" alt="bookcover">`
+    card.innerHTML = `<img src="http://localhost:1337${coverImg.data.attributes.url}" class="bookThumbnail" alt="bookcover">`
 
-    
     let textDiv = document.createElement("div")
     textDiv.classList.add("text")
     textDiv.innerHTML = `<div>
@@ -237,7 +175,6 @@ function bookCard(obj) {
         <p>Pages: ${pages}<br>
         Relese date: ${releaseDate}</p>
     </div>`
-
 
     let btn = document.createElement("button")
     btn.classList.add("btn", "addBtn")
@@ -256,27 +193,5 @@ function bookCard(obj) {
     document.querySelector(".bookContainer").append(card)
 }
 
-
-
-async function loadPage() {
-    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
-        changeNav()
-        setUsername()
-    }
-
-    let res = await axios.get("http://localhost:1337/api/books?populate=*");
-
-    contentWrapper.innerHTML = `<h2>Books</h2>
-            <div class="bookContainer">
-            </div>`
-
-    res.data.data.forEach(book => {
-        bookCard(book)
-    });
-}
-
-
-
-
-
+// calls page load
 loadPage()
