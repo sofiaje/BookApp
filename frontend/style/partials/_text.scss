@@ -1,6 +1,7 @@
 h1,h2,h3,h4,h5 {
     font-family: 'Cormorant Garamond', serif;
     padding: 0.5em 0 0 0;
+    color: var(--heading-color);
 }
 
 
@@ -9,7 +10,12 @@ h1,h2,h3,h4,h5 {
 }
 
 p {
+    color: var(--text-color);
     padding: 0.5rem 0;
+}
+
+a {
+    color: var(--text-color);
 }
 
 .bigText {
@@ -36,7 +42,7 @@ p {
 
 // logged in as
 #userInfo {
-    color: rgb(215, 215, 215);
+    color: var(--user-info);
     padding: 1rem;
 }
 
@@ -44,12 +50,12 @@ p {
 //------------------- star grading -------------------
 
 .author {
-    color: grey;
+    color: var(--author);
 }
 .grade {
-    color: rgb(199, 199, 199);
+    color: var(--star-grade-light);
     // cursor: pointer;
 }
 .color {
-    color: rgb(93, 87, 79);
+    color: var(--star-grade-dark);
 }

@@ -12,14 +12,15 @@ export async function getData(url) {
 
 // create relations between user and book
 export async function changeApi(id, user) {
-    await axios.put(`http://localhost:1337/api/users/${user}`, {
+    let res = await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
         books: id 
     },
         {
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
             }
-    })
+        })
+    console.log(res)
 }
 
 

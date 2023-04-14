@@ -2,26 +2,33 @@
 
 button {
     cursor: pointer;
+    color: var(--text-color);
+    border-radius: 4px;
+
 }
 
 .btn {
+    cursor: pointer;
     padding: 0.5rem;
+    background-color: var(--transparent);
+    border: 1px solid var(--text-color);
 }
 
 //add to readinglist
 .addBtn {
-    background-color: rgba(0,0,0,0);
-    color:rgb(95, 95, 95);
+    background-color: var(--transparent);
+    color:var(--star-grade-dark);
 
     border: none;
     align-self: flex-start;
     &:hover{
-        color: rgb(165, 165, 165);
+        color:var(--star-grade-light);
+
     }
 }
 
 .invisible {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--transparent);
     border: none;
     &:hover {
         font-weight:bolder;
@@ -29,16 +36,14 @@ button {
 }
 
 .startBtn{
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--transparent);
     font-weight: 100;
-    color: black;
     margin-top: 2.5rem;
     padding: 1rem 2rem;
     font-size: 1rem;
-    border: 1px solid;
-    border-radius: 4px;
+    border: 1px solid var(--text-color);
     &:hover {
         // background-color: lightgray;
-        box-shadow: 0 0 10px 5px rgba(221, 221, 221, 0.731);
+        box-shadow: 0 0 10px 5px var(--shadow-light);
     }
 }

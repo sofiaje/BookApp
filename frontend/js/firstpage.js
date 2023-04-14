@@ -1,7 +1,7 @@
 import { changeNav } from "./nav.js"
 import { setUsername } from "./mypage.js"
 import { loginpage } from "./login.js"
-import { addToList } from "./cards.js"
+import { addToList, calcRate } from "./cards.js"
 
 
 let allBooks
@@ -11,12 +11,10 @@ let allBooks
 
 export async function loadPage() {
 
-    // ändra vid betygsättning - behöver alltid hämta nytt data då, för att få senaste uppdateringen?
-    if (allBooks === undefined) {
-        let res = await axios.get("http://localhost:1337/api/books?populate=*");
-        allBooks = res.data.data
-    }
-
+    // needs to be updated because of the grades
+    let res = await axios.get("http://localhost:1337/api/books?populate=*");
+    allBooks = res.data.data
+    console.log(res.data)
 
     contentWrapper.innerHTML = `
     <div class="firstpageContainer">
@@ -28,17 +26,18 @@ export async function loadPage() {
     </div>
     <div class="firstpageInfo">
         <article>
-            <h2>About us</h2>
-            <p>LitRate is an innovative mobile app that allows users to rate and review a carefully curated selection of books and create personalized reading lists. Our small company is dedicated to providing a platform that is easy to use, visually appealing, and fosters a sense of community among readers.</p>
-        </article>
-        <article>
             <h2>How does it work?</h2>
             <p>With LitRate, you can easily discover new books based on your interests and share your thoughts and opinions with other book lovers. Whether you're an avid reader or just looking for your next great read, LitRate is the perfect app for you.</p>
         </article>
         <article>
-            <h2>The books</h2>
-            <p>Earum harum obcaecati reiciendis ex deserunt est sed in excepturi fugit voluptatum.</p>
+            <h2>About us</h2>
+            <p>LitRate is an innovative mobile app that allows users to rate and review a carefully curated selection of books and create personalized reading lists. Our small company is dedicated to providing a platform that is easy to use, visually appealing, and fosters a sense of community among readers.</p>
         </article>
+        <article>
+            <h2>The books</h2>
+            <p>Earum harum obcaecati reiciendis ex deserunt est sed in excepturi fugit voluptatum deserunt est sed in excepturi fugit volupta.</p>
+        </article>
+        
     </div>
         
     <h2 class="p-1">Our selection</h2>
@@ -46,7 +45,8 @@ export async function loadPage() {
     </div>`
 
     allBooks.forEach(book => {
-        bookCard(book)
+        let grade = calcRate(book.attributes.rate)
+        bookCard(book, grade)
     });
 
     document.getElementById("startBtn").addEventListener("click", loginpage)
@@ -62,8 +62,12 @@ export async function loadPage() {
 
 
 
-export function bookCard(obj) {
-    let { title, author, pages, releaseDate, grade, coverImg } = obj.attributes
+
+
+export function bookCard(obj, grade) {
+    let { title, author, pages, releaseDate, coverImg } = obj.attributes
+
+    console.log()
 
     let card = document.createElement("div");
     card.classList.add("card")
@@ -80,7 +84,7 @@ export function bookCard(obj) {
         <i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i>
         <i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i>
         <i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></span>
-        ${grade === null ? "" :  grade} 
+        <span class="color">${grade === null ? "" :  grade} </span>
         <br><br>
         <p>Pages: ${pages}<br>
         Relese date: ${releaseDate}</p>

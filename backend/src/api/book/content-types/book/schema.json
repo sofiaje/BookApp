@@ -21,9 +21,6 @@
     "pages": {
       "type": "integer"
     },
-    "grade": {
-      "type": "decimal"
-    },
     "coverImg": {
       "type": "media",
       "multiple": false,
@@ -39,6 +36,17 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
+      "mappedBy": "books"
+    },
+    "rate": {
+      "type": "component",
+      "repeatable": true,
+      "component": "grade.grade"
+    },
+    "grades": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grade.grade",
       "mappedBy": "books"
     }
   }

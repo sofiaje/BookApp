@@ -44,7 +44,7 @@ export async function loginpage() {
 
             <input type="submit" class="btn" value="Register"><br>
         </form>
-        <button class="invisible" id="backToLog"><i class="fa-solid fa-arrow-left-long"></i> Back to login</button>
+        <a class="navLink" id="backToLog"><i class="fa-solid fa-arrow-left-long"></i> Back to login</a>
     </div>
     
     <p id="errorText" class="p-1"></p>`

@@ -12,13 +12,16 @@ $lg: "width >= 992px";
 $xl: "width >= 1200px";
 
 
+
+
+// reusable classes
+
 .hidden {
     display: none;
 }
 div.hidden {
     display: none;
 }
-
 
 .p-1 {
     padding: 0 1rem;

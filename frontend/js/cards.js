@@ -55,3 +55,47 @@ export function updateGrade(id, grade) {
         alert("du behöver vara medlem för att kunna betygsätta böcker")
     }
 }
+
+export function calcRate(arr) {
+    if (arr.length < 1) { return "" }
+
+    //reduce
+    const initialValue = 0;
+    const sum = arr.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.grade,
+        initialValue
+    );
+
+    return (sum / arr.length)
+}
+
+
+// ------------------------------------------------ static test ------------------------------------------------
+
+
+document.querySelector(".gradeBtn").addEventListener("click", (e) => {
+    console.log(e.target.value);
+
+    getColorScheme()
+    // changeGrade(e.target.value, 400)
+})
+
+export async function changeGrade(id, grade) {
+    let res = await axios.put(`http://localhost:1337/api/books/${id}?populate=*`, {
+        data: {
+            pages: grade
+        }
+    },
+        {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+            }
+        })
+    console.log(res)
+}
+
+
+async function getColorScheme() {
+    let res = await axios.get("http://localhost:1337/api/colorscheme")
+    console.log(res.data.data.attributes.color)
+}

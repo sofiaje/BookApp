@@ -1,6 +1,7 @@
 import { loginpage, logout } from "./login.js"
 import { renderMyPage } from "./mypage.js"
 import { loadPage } from "./firstpage.js"
+import { getColorScheme } from "./colorscheme.js"
 
 
 
@@ -24,6 +25,9 @@ document.getElementById("logoutBtn").addEventListener("click", logout)
 document.getElementById("mypageBtn").addEventListener("click", renderMyPage)
 
 
+
+//get color scheme
+getColorScheme()
 
 
 // calls page load on.. page load

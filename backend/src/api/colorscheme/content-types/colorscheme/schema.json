@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "colorschemes",
+  "info": {
+    "singularName": "colorscheme",
+    "pluralName": "colorschemes",
+    "displayName": "colorscheme",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light"
+    }
+  }
+}

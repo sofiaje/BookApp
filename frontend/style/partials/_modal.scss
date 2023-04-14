@@ -7,8 +7,7 @@
     overflow: auto;
     padding: 3rem;
     border-radius: 50%;
-    background-color: rgba(65, 65, 65, 0.75);
-    background-color: rgb(65, 89, 68);
-    background-color: $footer;
-    color: white;
+
+    background-color: var(--modal-bg);
+    color: var(--modal-text);
 }

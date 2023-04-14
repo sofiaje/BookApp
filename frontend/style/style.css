@@ -10,9 +10,50 @@ div.hidden {
   padding: 0 1rem;
 }
 
+:root {
+  --bg-color: rgb(252, 252, 252);
+  --footer-color: rgb(101, 94, 89);
+  --text-color: rgb(0, 0, 0);
+  --heading-color: rgb(0, 0, 0);
+  --transparent: rgba(0,0,0,0);
+  --shadow-light: rgba(221, 221, 221, 0.731);
+  --shadow-dark: rgb(213, 213, 213);
+  --user-info: rgb(215, 215, 215);
+  --star-grade-light: rgb(199, 199, 199);
+  --star-grade-dark: rgb(98, 91, 83);
+  --author: grey;
+  --card-border: rgb(205, 205, 205);
+  --btn: rgb(244, 244, 244);
+  --modal-bg: rgb(101, 94, 89);
+  --modal-text: white;
+}
+
+.dark {
+  --bg-color: rgb(30, 43, 33);
+  --bg-color: rgb(38, 56, 43);
+  --footer-color: rgb(14, 21, 16);
+  --text-color: rgb(187, 199, 190);
+  --text-color: rgb(181, 190, 182);
+  --heading-color: rgb(226, 233, 228);
+  --shadow-light: rgb(53, 80, 61);
+  --shadow-dark: rgb(17, 25, 19);
+  --shadow-dark: rgb(31, 43, 34);
+  --user-info: rgb(94, 121, 102);
+  --star-grade-light: rgb(94, 121, 102);
+  --star-grade-dark: rgb(231, 239, 233);
+  --author: rgb(187, 199, 190);
+  --card-border:rgb(94, 121, 102);
+  --card-border:rgb(60, 82, 67);
+  --modal-bg: rgb(60, 82, 67);
+}
+.dark img {
+  filter: brightness(90%);
+}
+
 h1, h2, h3, h4, h5 {
   font-family: "Cormorant Garamond", serif;
   padding: 0.5em 0 0 0;
+  color: var(--heading-color);
 }
 
 * {
@@ -20,7 +61,12 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
+  color: var(--text-color);
   padding: 0.5rem 0;
+}
+
+a {
+  color: var(--text-color);
 }
 
 .bigText {
@@ -45,20 +91,20 @@ p {
 }
 
 #userInfo {
-  color: rgb(215, 215, 215);
+  color: var(--user-info);
   padding: 1rem;
 }
 
 .author {
-  color: grey;
+  color: var(--author);
 }
 
 .grade {
-  color: rgb(199, 199, 199);
+  color: var(--star-grade-light);
 }
 
 .color {
-  color: rgb(93, 87, 79);
+  color: var(--star-grade-dark);
 }
 
 .navLink {
@@ -67,18 +113,25 @@ p {
 }
 .navLink:hover {
   font-weight: bolder;
+  border-bottom: 1px solid;
 }
 
 input {
   margin-bottom: 1rem;
   accent-color: green;
+  color: var(--text-color);
+  border-radius: 4px;
+}
+
+input[type=submit]:hover {
+  box-shadow: 0 0 10px 5px var(--shadow-light);
 }
 
 input[type=text], input[type=password], input[type=email] {
   background-color: rgb(241, 241, 241);
   padding: 1rem 1rem;
   width: 95%;
-  border-radius: 4px;
+  color: black;
   border: 1px solid rgb(231, 231, 231);
 }
 @media (width >= 768px) {
@@ -87,26 +140,36 @@ input[type=text], input[type=password], input[type=email] {
   }
 }
 
+label {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
 button {
   cursor: pointer;
+  color: var(--text-color);
+  border-radius: 4px;
 }
 
 .btn {
+  cursor: pointer;
   padding: 0.5rem;
+  background-color: var(--transparent);
+  border: 1px solid var(--text-color);
 }
 
 .addBtn {
-  background-color: rgba(0, 0, 0, 0);
-  color: rgb(95, 95, 95);
+  background-color: var(--transparent);
+  color: var(--star-grade-dark);
   border: none;
   align-self: flex-start;
 }
 .addBtn:hover {
-  color: rgb(165, 165, 165);
+  color: var(--star-grade-light);
 }
 
 .invisible {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--transparent);
   border: none;
 }
 .invisible:hover {
@@ -114,17 +177,15 @@ button {
 }
 
 .startBtn {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--transparent);
   font-weight: 100;
-  color: black;
   margin-top: 2.5rem;
   padding: 1rem 2rem;
   font-size: 1rem;
-  border: 1px solid;
-  border-radius: 4px;
+  border: 1px solid var(--text-color);
 }
 .startBtn:hover {
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 0.731);
+  box-shadow: 0 0 10px 5px var(--shadow-light);
 }
 
 .bookThumbnail {
@@ -156,7 +217,7 @@ button {
 header {
   padding: 1rem;
   box-shadow: 0 0 10px 5px rgb(67, 109, 79);
-  box-shadow: 0 0 10px 5px rgb(213, 213, 213);
+  box-shadow: 0 0 10px 5px var(--shadow-dark);
 }
 header nav {
   display: flex;
@@ -234,8 +295,8 @@ header nav {
 
 footer {
   padding: 1rem;
-  color: white;
-  background-color: rgb(101, 94, 89);
+  color: var(--p-white);
+  background-color: var(--footer-color);
 }
 
 .bookContainer {
@@ -249,7 +310,7 @@ footer {
 .card {
   display: flex;
   padding-top: 1rem;
-  border-top: 1px solid rgb(205, 205, 205);
+  border-top: 1px solid var(--card-border);
   width: 100%;
 }
 .card .text {
@@ -280,10 +341,8 @@ footer {
   overflow: auto;
   padding: 3rem;
   border-radius: 50%;
-  background-color: rgba(65, 65, 65, 0.75);
-  background-color: rgb(65, 89, 68);
-  background-color: rgb(101, 94, 89);
-  color: white;
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
 }
 
 * {
@@ -293,5 +352,5 @@ footer {
 }
 
 body {
-  background-color: rgb(252, 252, 252);
+  background-color: var(--bg-color);
 }/*# sourceMappingURL=style.css.map */

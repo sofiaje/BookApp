@@ -1,0 +1,54 @@
+:root {
+    --bg-color: rgb(252, 252, 252);
+    --footer-color: rgb(101, 94, 89);
+    --text-color: rgb(0, 0, 0);
+    --heading-color: rgb(0, 0, 0);
+
+    --transparent: rgba(0,0,0,0);
+
+    --shadow-light: rgba(221, 221, 221, 0.731);
+    --shadow-dark: rgb(213, 213, 213);
+
+    --user-info: rgb(215, 215, 215);
+
+    --star-grade-light: rgb(199, 199, 199);
+    --star-grade-dark: rgb(98, 91, 83);
+    
+    --author: grey;
+    --card-border: rgb(205, 205, 205);
+
+    --btn: rgb(244, 244, 244);
+
+    --modal-bg: rgb(101, 94, 89);
+    --modal-text: white; 
+}
+
+
+.dark {
+    --bg-color: rgb(30, 43, 33);
+    --bg-color: rgb(38, 56, 43);
+    --footer-color: rgb(14, 21, 16);
+    --text-color: rgb(187, 199, 190);
+    --text-color: rgb(181, 190, 182);
+    --heading-color: rgb(226, 233, 228);
+
+    --shadow-light: rgb(53, 80, 61);
+    --shadow-dark: rgb(17, 25, 19);
+    --shadow-dark: rgb(31, 43, 34);
+
+    --user-info: rgb(94, 121, 102);
+
+    --star-grade-light: rgb(94, 121, 102);
+    --star-grade-dark: rgb(231, 239, 233);
+
+    --author: rgb(187, 199, 190);
+
+    --card-border:rgb(94, 121, 102);
+    --card-border:rgb(60, 82, 67);
+
+    --modal-bg: rgb(60, 82, 67);
+
+    img {
+        filter: brightness(90%);
+    }
+}

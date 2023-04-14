@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_grade_grades",
+  "info": {
+    "displayName": "grade"
+  },
+  "options": {},
+  "attributes": {
+    "grade": {
+      "type": "integer"
+    }
+  }
+}

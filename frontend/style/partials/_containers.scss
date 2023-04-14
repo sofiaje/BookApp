@@ -15,7 +15,7 @@
 header{
     padding: 1rem;
     box-shadow: 0 0 10px 5px rgb(67, 109, 79);
-    box-shadow: 0 0 10px 5px rgb(213, 213, 213);
+    box-shadow: 0 0 10px 5px var(--shadow-dark);
 
     nav {
         display: flex;
@@ -84,8 +84,8 @@ header{
 
 footer {
     padding: 1rem;
-    color: $p-white;
-    background-color: $footer;
+    color: var(--p-white);
+    background-color: var(--footer-color);
 }
 
 
@@ -94,7 +94,6 @@ footer {
 
 .bookContainer {
     display: flex;
-    // justify-content: space-between;
     gap: 3rem;
     flex-wrap: wrap;
 
@@ -108,8 +107,7 @@ footer {
 .card {
     display: flex;
     padding-top: 1rem;
-    // box-shadow: 0 0 10px 5px rgb(231, 231, 231);
-    border-top: 1px solid rgb(205, 205, 205);
+    border-top: 1px solid var(--card-border);
     width: 100%;
     .text {
         width: 100%;

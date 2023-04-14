@@ -5,8 +5,7 @@ TODO
 
 
 (VG)
-- choose between two diffrent color styles
-- list with all the books user has graded
+- list with all the rated books
 - make list sortable by name, name of author, grade (from highest down)
 
 
