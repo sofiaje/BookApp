@@ -21,10 +21,14 @@ export async function renderMyPage() {
     <h2 class="p-1">Rated books</h2>
     <div id="gradedWrapper"></div>`
     
+    if (me.books.length > 0) {
+        me.books.forEach(book => {
+            renderReadList(book)
+        })
+    } else {
+        document.querySelector(".bookContainer").innerText = "No books here! Add books by pressing the bookmark next to the book you like on the home page."
+    }
     
-    me.books?.forEach(book => {
-        renderReadList(book)
-    })
 }
 
 
@@ -61,7 +65,6 @@ export function renderReadList(obj) {
     btn.innerHTML = `<i class="fa-solid fa-xmark fa-xl"></i>`
 
     btn.addEventListener("click", () => {
-        console.log(`ta bort bok nr ${obj.id}`)
         removeBook(obj.id)
     })
 

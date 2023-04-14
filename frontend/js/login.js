@@ -78,7 +78,6 @@ async function login() {
         errorText.innerHTML = `Please make sure all fields are filled in correctly`
     } else {
         let data = await loginApi(inputName, passw)
-        console.log(data)
         if (data) {
             signedIn(data);
             renderMyPage()
@@ -98,8 +97,6 @@ async function register() {
 
     } else {
         let data = await registerUserApi(inputNameReg.value, emailReg.value, passwReg.value)
-        console.log(data)
-
         if (data) {
             signedIn(data);
             renderMyPage()
@@ -128,7 +125,6 @@ export function signedIn(data) {
         sessionStorage.setItem("jwt", data.jwt)
     }
 }
-
 
 
 // toggle register / login visability

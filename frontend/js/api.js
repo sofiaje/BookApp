@@ -12,7 +12,7 @@ export async function getData(url) {
 
 // create relations between user and book
 export async function changeApi(id, user) {
-    let res = await axios.put(`http://localhost:1337/api/users/${user}`, {
+    await axios.put(`http://localhost:1337/api/users/${user}`, {
         books: id 
     },
         {

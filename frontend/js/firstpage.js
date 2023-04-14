@@ -4,19 +4,18 @@ import { loginpage } from "./login.js"
 import { addToList } from "./cards.js"
 
 
+let allBooks
+
 
 // ------------------------------ load first page ------------------------------------
-let allBooks
 
 export async function loadPage() {
 
-    // ändra vid betygsättning, behöver då alltid hämta nytt data för att få senaste uppdateringen?
+    // ändra vid betygsättning - behöver alltid hämta nytt data då, för att få senaste uppdateringen?
     if (allBooks === undefined) {
         let res = await axios.get("http://localhost:1337/api/books?populate=*");
         allBooks = res.data.data
-        console.log("fetch books / not logged in")
     }
-
 
 
     contentWrapper.innerHTML = `
