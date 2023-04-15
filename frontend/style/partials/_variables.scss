@@ -1,9 +1,3 @@
-$accColor: rgb(83, 89, 83);
-$footer: rgb(101, 94, 89);
-
-$p-white: white;
-$p-black: black;
-
 // Breakpoints
 $xs: "width >= 406px";
 $sm: "width >= 576px";
@@ -25,4 +19,10 @@ div.hidden {
 
 .p-1 {
     padding: 0 1rem;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }

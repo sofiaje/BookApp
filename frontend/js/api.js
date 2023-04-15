@@ -1,4 +1,13 @@
-// fetch data from api
+// fetch data from api 
+
+//get info, public
+export async function getInfo(url) {
+    let res = await axios.get(`${url}`)
+    return res.data
+}
+
+
+// fetch auth data from api
 export async function getData(url) {
 
     let res = await axios.get(url, {
@@ -10,7 +19,7 @@ export async function getData(url) {
 }
 
 
-// create relations between user and book
+// create relations between user and book, api
 export async function changeApi(id, user) {
     let res = await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
         books: id 
@@ -20,12 +29,11 @@ export async function changeApi(id, user) {
                 Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
             }
         })
-    console.log(res)
 }
 
 
 
-// function to register as new user in api
+// function to register as new user, api
 export async function registerUserApi(user, email, passw) {
     try {
         let res = await axios.post("http://localhost:1337/api/auth/local/register", {
@@ -41,7 +49,7 @@ export async function registerUserApi(user, email, passw) {
 }
 
 
-// function to log in user
+// function user log in, api
 export async function loginApi(user, passw) {
     try {
         let res = await axios.post("http://localhost:1337/api/auth/local", {

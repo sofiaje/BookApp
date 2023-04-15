@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "first_page_infos",
+  "info": {
+    "singularName": "first-page-info",
+    "pluralName": "first-page-infos",
+    "displayName": "first-page-info",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "article": {
+      "displayName": "article",
+      "type": "component",
+      "repeatable": true,
+      "component": "article.article"
+    },
+    "heading": {
+      "type": "string"
+    }
+  }
+}

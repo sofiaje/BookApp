@@ -10,6 +10,12 @@ div.hidden {
   padding: 0 1rem;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 :root {
   --bg-color: rgb(252, 252, 252);
   --footer-color: rgb(101, 94, 89);
@@ -29,15 +35,15 @@ div.hidden {
 }
 
 .dark {
-  --bg-color: rgb(30, 43, 33);
   --bg-color: rgb(38, 56, 43);
+  --bg-color: rgb(30, 43, 33);
   --footer-color: rgb(14, 21, 16);
   --text-color: rgb(187, 199, 190);
   --text-color: rgb(181, 190, 182);
   --heading-color: rgb(226, 233, 228);
   --shadow-light: rgb(53, 80, 61);
-  --shadow-dark: rgb(17, 25, 19);
   --shadow-dark: rgb(31, 43, 34);
+  --shadow-dark: rgb(17, 25, 19);
   --user-info: rgb(94, 121, 102);
   --star-grade-light: rgb(94, 121, 102);
   --star-grade-dark: rgb(231, 239, 233);
@@ -95,6 +101,11 @@ a {
   padding: 1rem;
 }
 
+#user {
+  text-align: right;
+  padding: 0.5rem;
+}
+
 .author {
   color: var(--author);
 }
@@ -130,14 +141,9 @@ input[type=submit]:hover {
 input[type=text], input[type=password], input[type=email] {
   background-color: rgb(241, 241, 241);
   padding: 1rem 1rem;
-  width: 95%;
+  width: 100%;
   color: black;
   border: 1px solid rgb(231, 231, 231);
-}
-@media (width >= 768px) {
-  input[type=text], input[type=password], input[type=email] {
-    width: 50%;
-  }
 }
 
 label {
@@ -224,30 +230,9 @@ header nav {
   align-items: baseline;
   gap: 1.5rem;
 }
-
-.container {
+header .container {
   max-width: 1400px;
   margin-inline: auto;
-}
-
-#user {
-  text-align: right;
-  padding: 0.5rem;
-}
-
-.flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.max {
-  width: 95%;
-}
-@media (width >= 768px) {
-  .max {
-    width: 50%;
-  }
 }
 
 .firstpageContainer {
@@ -274,11 +259,6 @@ header nav {
   align-items: center;
   margin-bottom: 4rem;
 }
-.firstpageInfo article {
-  max-width: 600px;
-  padding: 1rem;
-  width: 100%;
-}
 @media (width >= 768px) {
   .firstpageInfo {
     gap: 2rem;
@@ -288,9 +268,25 @@ header nav {
 @media (width >= 992px) {
   .firstpageInfo {
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
   }
+}
+.firstpageInfo article {
+  max-width: 600px;
+  padding: 1rem;
+  width: 100%;
+}
+@media (width >= 992px) {
+  .firstpageInfo article {
+    max-width: 30%;
+  }
+}
+
+.loginCont {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 footer {

@@ -32,3 +32,5 @@ Questions / notes
 - Filling text on login-page
 - Filling text on profile-page
 - Flex mixins or framework ?
+
+- Get first page image via api ? 

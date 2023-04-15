@@ -22,30 +22,17 @@ header{
         align-items: baseline;
         gap: 1.5rem;
     }
-}
-
-.container {
-    max-width: 1400px;
-    margin-inline: auto;
-}
-
-#user {
-    text-align: right;
-    padding:0.5rem
-}
-
-.flex{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-.max {
-    width: 95%;
-    @media ($md){
-        width: 50%;
+    .container {
+        max-width: 1400px;
+        margin-inline: auto;
     }
-
 }
+
+
+
+
+
+// ------------------- first page -------------------
 
 .firstpageContainer {
     display: flex;
@@ -54,33 +41,46 @@ header{
     align-items: center;
     margin-bottom: 2rem;
     @media ($md){
+        // margin:1rem;
         margin-bottom: 4rem;
+
     }
     @media ($lg){
         flex-direction: row;
     }
 }
+
 .firstpageInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 4rem;
-    article {
-        max-width: 600px;
-        padding: 1rem;
-        width: 100%;
-    }
+    
     @media ($md) {
         gap: 2rem;
         font-size: 1.2rem;
     }
     @media($lg) {
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-start;
     }
+    article {
+        max-width: 600px;
+        padding: 1rem;
+        width: 100%;
+        @media($lg) {
+            max-width: 30%;
+        }
+    }
 }
 
+// login / register form container
+.loginCont {
+    max-width: 600px;
+    margin: 0 auto;
+}
 
 footer {
     padding: 1rem;
@@ -102,7 +102,6 @@ footer {
     // white-space: nowrap;
     margin: 1rem;
     padding-bottom: 2rem;
-    
 }
 .card {
     display: flex;
@@ -122,6 +121,5 @@ footer {
     }
     @media ($xl) {
         width: 30%;
-        
     }
 }

@@ -4,29 +4,28 @@
   "info": {
     "singularName": "grade",
     "pluralName": "grades",
-    "displayName": "grade"
+    "displayName": "review",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "grade": {
-      "type": "component",
-      "repeatable": true,
-      "component": "grade.grade"
-    },
-    "books": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::book.book",
-      "inversedBy": "grades"
-    },
     "users": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "grades"
+    },
+    "grade": {
+      "type": "integer"
+    },
+    "book": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::book.book",
+      "inversedBy": "review"
     }
   }
 }

@@ -62,11 +62,11 @@ export function calcRate(arr) {
     //reduce
     const initialValue = 0;
     const sum = arr.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.grade,
+        (accumulator, currentValue) => accumulator + Number(currentValue),
         initialValue
     );
-
-    return (sum / arr.length)
+        
+    return sum / arr.length
 }
 
 

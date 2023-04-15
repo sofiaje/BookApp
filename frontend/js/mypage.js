@@ -23,9 +23,11 @@ export async function renderMyPage() {
     <h2 class="p-1">Rated books</h2>
     <div id="gradedWrapper"></div>`
     
+    
     if (me.books.length > 0) {
         me.books.forEach(book => {
-            let grade = calcRate(book.rate)
+            let grades = book.review.map(x => x.grade)
+            let grade = calcRate(grades)
             renderReadList(book, grade)
         })
     } else {

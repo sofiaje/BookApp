@@ -9,6 +9,7 @@ let errorText, inputName, passw, inputNameReg, emailReg, passwReg
 
 export async function loginpage() {
     contentWrapper.innerHTML = `
+    <div class="loginCont">
     <div id="login-container" class="p-1">
         <h2 class="head">Login</h2>
         <form action="" id="loginform">
@@ -18,7 +19,7 @@ export async function loginpage() {
             <label for="passw">Password</label><br>
             <input type="password" id="passw"><br>
 
-            <div class="flex max">
+            <div class="flex">
                 <div>
                     <input type="checkbox" id="remember">
                     <label for="remember">Remember me</label>
@@ -47,7 +48,8 @@ export async function loginpage() {
         <a class="navLink" id="backToLog"><i class="fa-solid fa-arrow-left-long"></i> Back to login</a>
     </div>
     
-    <p id="errorText" class="p-1"></p>`
+    <p id="errorText" class="p-1"></p>
+    </div>`
 
     errorText = document.getElementById("errorText")
 

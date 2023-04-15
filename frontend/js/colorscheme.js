@@ -1,14 +1,10 @@
-// http://localhost:1337/api/colorscheme
-
+import { getInfo } from "./api.js"
 
 export async function getColorScheme() {
-    let res = await axios.get("http://localhost:1337/api/colorscheme")
-    console.log(res.data.data.attributes.color)
+    let data = await getInfo("http://localhost:1337/api/colorscheme")
 
-    if (res.data.data.attributes.color === "light") {
-        console.log("there is light")
-    } else {
+    if (data.data.attributes.color === "dark") {
         document.body.classList.add("dark")
-    }
+    } 
 }
 

@@ -1,54 +1,54 @@
 import { changeNav } from "./nav.js"
 import { setUsername } from "./mypage.js"
 import { loginpage } from "./login.js"
+import { getInfo } from "./api.js"
 import { addToList, calcRate } from "./cards.js"
 
 
 let allBooks
+let info
 
 
 // ------------------------------ load first page ------------------------------------
 
+
 export async function loadPage() {
 
-    // needs to be updated because of the grades
-    let res = await axios.get("http://localhost:1337/api/books?populate=*");
-    allBooks = res.data.data
-    console.log(res.data)
+    // if first time on home page, fetch first page info and save in info variable
+    if (!info) { info = await getInfo("http://localhost:1337/api/first-page-info?populate=*") }
+    let articleArr = info.data.attributes.article
 
+    // fetch books, everytime on page load
+    let res = await getInfo("http://localhost:1337/api/books?populate=*");
+    allBooks = res.data
+console.log(allBooks)
+
+    // display info first page
     contentWrapper.innerHTML = `
     <div class="firstpageContainer">
         <img src="assets/bookcovers/mag.jpg" class="bigImg" alt="pile of books">
         <div class="bigText">
-            <h1>Keep track of<br> your reading</h1>
+            <h1>${info.data.attributes.heading}</h1>
             <button class="btn startBtn" id="startBtn">Start now</button>
         </div>
     </div>
     <div class="firstpageInfo">
-        <article>
-            <h2>How does it work?</h2>
-            <p>With LitRate, you can easily discover new books based on your interests and share your thoughts and opinions with other book lovers. Whether you're an avid reader or just looking for your next great read, LitRate is the perfect app for you.</p>
-        </article>
-        <article>
-            <h2>About us</h2>
-            <p>LitRate is an innovative mobile app that allows users to rate and review a carefully curated selection of books and create personalized reading lists. Our small company is dedicated to providing a platform that is easy to use, visually appealing, and fosters a sense of community among readers.</p>
-        </article>
-        <article>
-            <h2>The books</h2>
-            <p>Earum harum obcaecati reiciendis ex deserunt est sed in excepturi fugit voluptatum deserunt est sed in excepturi fugit volupta.</p>
-        </article>
-        
     </div>
         
     <h2 class="p-1">Our selection</h2>
     <div class="bookContainer">
     </div>`
 
-    allBooks.forEach(book => {
-        let grade = calcRate(book.attributes.rate)
+    // render articles on first page
+    articleArr.forEach(x => { renderArticles(x.title, x.body)})
+
+    // console.log(allBooks)
+    allBooks.forEach((book, i)=> {
+        let grades = book.attributes.review.data.map(x => x.attributes.grade)
+        let grade = calcRate(grades)
         bookCard(book, grade)
     });
-
+    
     document.getElementById("startBtn").addEventListener("click", loginpage)
 
     if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
@@ -61,6 +61,11 @@ export async function loadPage() {
 
 
 
+function renderArticles(title, body) {
+    let article = document.createElement("article")
+    article.innerHTML = `<h2>${title}</h2><p>${body}</p>`
+    document.querySelector(".firstpageInfo").append(article)
+}
 
 
 

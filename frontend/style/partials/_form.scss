@@ -18,12 +18,10 @@ input {
     accent-color: green;
     color: var(--text-color);
     border-radius: 4px;
-
 }
 
 input[type="submit"]{
     &:hover {
-        // background-color: lightgray;
         box-shadow: 0 0 10px 5px var(--shadow-light);
     }
 }
@@ -31,12 +29,9 @@ input[type="submit"]{
 input[type="text"], input[type="password"], input[type="email"] {
     background-color: rgb(241, 241, 241);
     padding: 1rem 1rem;
-    width: 95%;
+    width: 100%;
     color: black;
     border: 1px solid rgb(231, 231, 231);
-    @media ($md){
-        width: 50%;
-    }
 }
 
 label{
