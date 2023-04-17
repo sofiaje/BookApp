@@ -138,6 +138,10 @@ input[type=submit]:hover {
   box-shadow: 0 0 10px 5px var(--shadow-light);
 }
 
+input [type=radio] {
+  display: none;
+}
+
 input[type=text], input[type=password], input[type=email] {
   background-color: rgb(241, 241, 241);
   padding: 1rem 1rem;
@@ -205,6 +209,10 @@ button {
   .bigImg {
     width: 50%;
   }
+}
+
+i, path, svg {
+  pointer-events: none;
 }
 
 #pagewrapper {
@@ -326,6 +334,10 @@ footer {
   .card {
     width: 30%;
   }
+}
+
+.star {
+  display: inline-block;
 }
 
 .modal {

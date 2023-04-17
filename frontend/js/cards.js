@@ -1,7 +1,12 @@
-import { changeApi } from "./api.js"
+import { changeApi, getData } from "./api.js"
 import { modal } from "./modal.js"
 import { renderMyPage } from "./mypage.js"
 
+
+export async function getUserInfo() {
+    let me = await getData("http://localhost:1337/api/users/me?populate=deep")
+    return me
+}
 
 
 // ------------------------------------------------ reading list ------------------------------------------------
@@ -76,14 +81,15 @@ export function calcRate(arr) {
 document.querySelector(".gradeBtn").addEventListener("click", (e) => {
     console.log(e.target.value);
 
-    getColorScheme()
-    // changeGrade(e.target.value, 400)
+    createGrade(e.target.value, 1, 3)
 })
 
-export async function changeGrade(id, grade) {
-    let res = await axios.put(`http://localhost:1337/api/books/${id}?populate=*`, {
+export async function createGrade(grade, userId, bookId) {
+    let res = await axios.post(`http://localhost:1337/api/grades`, {
         data: {
-            pages: grade
+            grade: grade,
+            users: userId,
+            book: bookId
         }
     },
         {

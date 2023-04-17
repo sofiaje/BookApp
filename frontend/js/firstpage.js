@@ -2,7 +2,8 @@ import { changeNav } from "./nav.js"
 import { setUsername } from "./mypage.js"
 import { loginpage } from "./login.js"
 import { getInfo } from "./api.js"
-import { addToList, calcRate } from "./cards.js"
+import { addToList, calcRate, getUserInfo } from "./cards.js"
+
 
 
 let allBooks
@@ -21,7 +22,7 @@ export async function loadPage() {
     // fetch books, everytime on page load
     let res = await getInfo("http://localhost:1337/api/books?populate=*");
     allBooks = res.data
-console.log(allBooks)
+    console.log(allBooks)
 
     // display info first page
     contentWrapper.innerHTML = `
@@ -84,11 +85,12 @@ export function bookCard(obj, grade) {
         <h3>${title}</h3>
         <p class="author">by ${author}</p>
         <span class="grade">
-        <i class="fa-solid fa-star ${1 <= grade ? "color" : ""}"></i>
-        <i class="fa-solid fa-star ${2 <= grade ? "color" : ""}"></i>
-        <i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i>
-        <i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i>
-        <i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></span>
+            <div class="star"  value="1"><i class="fa-solid fa-star ${1 <= grade ? "color" : ""}"></i></div>
+            <div class="star" value="2"><i class="fa-solid fa-star ${2 <= grade ? "color" : ""}"></i></div>
+            <div class="star" value="3"><i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i></div>
+            <div class="star" value="4"><i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i></div>
+            <div class="star" value="5"><i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></div>
+        </span>
         <span class="color">${grade === null ? "" :  grade} </span>
         <br><br>
         <p>Pages: ${pages}<br>
@@ -110,4 +112,23 @@ export function bookCard(obj, grade) {
     })
 
     document.querySelector(".bookContainer").append(card)
+
+    setRatingStars(card)
+}
+
+
+function setRatingStars(card) {
+    let stars = card.querySelectorAll(".star")
+    console.log(stars)
+    stars.forEach(star => {
+        console.log(star)
+        star.addEventListener("click", (e) => {
+            getValue(e)
+        })
+    })
+}
+
+function getValue(e) {
+    let targ = e.target
+    console.log("ho ho", targ.getAttribute('value'))
 }
