@@ -15,7 +15,7 @@ export async function setUsername() {
 
 export async function renderMyPage() {
     let me = await getUserInfo()
-    console.log(me)
+    // console.log(me)
     setUsername()
     changeNav()
     
@@ -47,9 +47,12 @@ export async function renderMyPage() {
 
     (me.grades.length > 0) ? ratedList(me.grades) : document.querySelector("#gradedWrapper").innerHTML = "<p>No rated books yet</p>" 
     
-    document.getElementById("sortBy").addEventListener("change", (e) => {
+    document.getElementById("sortBy").addEventListener("change", async (e) => {
+        let me = await getUserInfo()
+
         document.querySelector("#gradedWrapper").innerHTML = ""
         let sorted = sortRatedList(me.grades, e.target.value)
+
         ratedList(sorted)
     })
 }

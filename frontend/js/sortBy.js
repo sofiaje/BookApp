@@ -1,27 +1,29 @@
 import { renderReadList } from "./mypage.js"
 import { calcRate } from "./starRating.js"
 import { updateGrade } from "./api.js"
+import { getUserInfo } from "./cards.js"
+
 
 
 
 
 export function sortRatedList(obj, value) {
-    if (value === "author") {
-        let sortedObj = [...obj].sort(sortByAuth)
-      return sortedObj
+  if (value === "author") {
+    let sortedObj = [...obj].sort(sortByAuth)
+    return sortedObj
       
-    } else if(value === "title") {
-        let sortedObj = [...obj].sort(sortByTitle)
-      return sortedObj
+  } else if(value === "title") {
+    let sortedObj = [...obj].sort(sortByTitle)
+    return sortedObj
       
-    } else if(value === "rating") {
-        let sortedObj = [...obj].sort((a, b) => {
-            return b.book.sumGrade - a.book.sumGrade
-        })
-        console.log("sort by rating", sortedObj)
-        return sortedObj
-    }
-    return obj
+  } else if (value === "rating") {
+    let sortedObj = [...obj].sort((a, b) => {
+    // console.log(a.book.review)
+      return b.book.sumGrade - a.book.sumGrade
+    })
+    return sortedObj
+  }
+  return obj
 }
 
 
@@ -52,14 +54,15 @@ export function sortByTitle(a,b) {
 
 
 export async function ratedList(obj) {
-    if (obj.length > 0) {
-        obj.forEach(book => {
+  if (obj.length > 0) {
+    obj.forEach(book => {
+            let sumGrade
             let grades = book.book.review.map(x => x.grade)
             let grade = calcRate(grades)
-            if (grade) {
-                updateGrade(grade, book.book.id)
-            }
-            renderReadList(book.book, grade, "#gradedWrapper")
+          if (grade) {
+              sumGrade = updateGrade(grade, book.book.id)
+          }
+          renderReadList(book.book, grade, "#gradedWrapper")
         })
     } 
 }

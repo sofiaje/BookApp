@@ -22,7 +22,7 @@ export function setRatingStars(card, id) {
 export async function createGrade(grade, bookId) {
     if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
         let me = await getUserInfo()
-        let res = await axios.post(`http://localhost:1337/api/grades`, {
+        await axios.post(`http://localhost:1337/api/grades`, {
         data: {
             grade: grade,
             users: me.id,

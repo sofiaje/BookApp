@@ -1,3 +1,5 @@
+import { getToken } from "./storage.js"
+
 //get info, public
 export async function getInfo(url) {
     let res = await axios.get(`${url}`)
@@ -10,7 +12,7 @@ export async function getData(url) {
 
     let res = await axios.get(url, {
         headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+            Authorization: `Bearer ${getToken()}`
         }
     })
     return res.data
@@ -19,12 +21,12 @@ export async function getData(url) {
 
 // create relations between user and book, api
 export async function changeApi(id, user) {
-    let res = await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
+    await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
         books: id 
     },
         {
             headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+                Authorization: `Bearer ${getToken()}`
             }
         })
 }
@@ -69,14 +71,14 @@ export async function loginApi(user, passw) {
 
 // update average grade
 export async function updateGrade(grade, id) {
-    await axios.put(`http://localhost:1337/api/books/${id}`, {
+    let res = await axios.put(`http://localhost:1337/api/books/${id}`, {
         data: {
             sumGrade: grade
         }
     },
     {
         headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+            Authorization: `Bearer ${getToken()}`
         }
     })
 }

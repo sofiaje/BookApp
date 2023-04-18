@@ -49,7 +49,6 @@ export async function loadPage() {
     allBooks.forEach((book, i)=> {
         let grades = book.attributes.review.data.map(x => x.attributes.grade)
         let grade = calcRate(grades)
-        // console.log(book)
         bookCard(book, grade)
     });
     

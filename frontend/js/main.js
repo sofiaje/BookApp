@@ -2,7 +2,6 @@ import { loginpage, logout } from "./login.js"
 import { renderMyPage } from "./mypage.js"
 import { loadPage } from "./firstpage.js"
 import { getColorScheme } from "./colorscheme.js"
-import { getUserInfo } from "./cards.js"
 
 
 

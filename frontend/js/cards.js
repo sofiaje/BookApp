@@ -1,6 +1,7 @@
 import { changeApi, getData } from "./api.js"
 import { modal } from "./modal.js"
 import { renderMyPage } from "./mypage.js"
+import { isLoggedIn } from "./storage.js"
 
 
 export async function getUserInfo() {
@@ -12,8 +13,7 @@ export async function getUserInfo() {
 // ------------------------------------------------ reading list ------------------------------------------------
 
 export async function addToList(id) {
-    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
-
+    if (isLoggedIn()) {
         let data = await getData("http://localhost:1337/api/users/me?populate=deep")
         
         let arr = data.books
