@@ -1,9 +1,10 @@
 import { getData } from "./api.js"
 import { changeNav } from "./nav.js"
 import { removeBook } from "./cards.js"
-import { calcRate, getUserInfo } from "./cards.js"
+import { getUserInfo } from "./cards.js"
+import { calcRate } from "./starRating.js"
 
-let me; 
+
 
 export async function setUsername() {
     document.getElementById("userInfo").innerHTML = `logged in as ${sessionStorage.getItem("user") ? sessionStorage.getItem("user") : localStorage.getItem("user")}`
@@ -12,15 +13,23 @@ export async function setUsername() {
 
 
 export async function renderMyPage() {
-    me = await getUserInfo()
-
+    let me = await getUserInfo()
+    console.log(me)
     setUsername()
     changeNav()
     
     contentWrapper.innerHTML = `
     <h2 class="p-1">Reading list</h2>
     <div id="readinglistWrapper" class="bookContainer"></div><br>
+    <div class="flex-1">
     <h2 class="p-1">Rated books</h2>
+    <select id="sortBy" class="p-1">
+        <option value="false">Sort by</option>
+        <option value="author">Author</option>
+        <option value="title">Title</option>
+        <option value="rating">Rating</option>
+    </select>
+    </div>
     <div id="gradedWrapper" class="bookContainer"></div>`
     
     
@@ -35,15 +44,58 @@ export async function renderMyPage() {
         document.querySelector(".bookContainer").innerHTML = "<p>No books here! Add books by pressing the bookmark next to the book you like on the home page.</p>"
     }
 
-    ratedList()
+    ratedList(me.grades)
+    
+    document.getElementById("sortBy").addEventListener("change", (e) => {
+        document.querySelector("#gradedWrapper").innerHTML = ""
+        let sorted = sortRatedList(me.grades, e.target.value)
+        ratedList(sorted)
+    })
 }
 
 
 
+function sortRatedList(obj, value) {
+    if (value === "author") {
+        let sortedObj = [...obj].sort(sortByAuth)
+        return sortedObj
+    } else if(value === "title") {
+        let sortedObj = [...obj].sort(sortByTitle)
+        return sortedObj
+    }
+    return obj
+}
 
-async function ratedList() {
-    if (me.grades.length > 0) {
-        me.grades.forEach(book => {
+
+
+// sort by author
+function sortByAuth(a,b) {
+    if ( a.book.author < b.book.author ){
+      return -1;
+    }
+    if ( a.book.author > b.book.author ){
+      return 1;
+    }
+    return 0;
+}
+
+
+// sort by title 
+function sortByTitle(a,b) {
+    if ( a.book.title < b.book.title ){
+      return -1;
+    }
+    if ( a.book.title > b.book.title ){
+      return 1;
+    }
+    return 0;
+}
+
+
+
+async function ratedList(obj) {
+    if (obj.length > 0) {
+        obj.forEach(book => {
             let grades = book.book.review.map(x => x.grade)
             let grade = calcRate(grades)
             renderReadList(book.book, grade, "#gradedWrapper")
@@ -85,6 +137,7 @@ export function renderReadList(obj, grade, elem, btn) {
     if (btn) { card.append(btn) }
     document.querySelector(elem).append(card)
 }
+
 
 
 function deleteFromReadingListBtn(func, obj) {

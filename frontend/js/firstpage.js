@@ -2,7 +2,8 @@ import { changeNav } from "./nav.js"
 import { setUsername } from "./mypage.js"
 import { loginpage } from "./login.js"
 import { getInfo } from "./api.js"
-import { addToList, calcRate, getUserInfo } from "./cards.js"
+import { addToList, getUserInfo } from "./cards.js"
+import { setRatingStars, calcRate } from "./starRating.js"
 
 
 
@@ -43,7 +44,6 @@ export async function loadPage() {
     // render articles on first page
     articleArr.forEach(x => { renderArticles(x.title, x.body)})
 
-    // console.log(allBooks)
     allBooks.forEach((book, i)=> {
         let grades = book.attributes.review.data.map(x => x.attributes.grade)
         let grade = calcRate(grades)
@@ -73,8 +73,6 @@ function renderArticles(title, body) {
 export function bookCard(obj, grade) {
     let { title, author, pages, releaseDate, coverImg } = obj.attributes
 
-    console.log()
-
     let card = document.createElement("div");
     card.classList.add("card")
     card.innerHTML = `<img src="http://localhost:1337${coverImg.data.attributes.url}" class="bookThumbnail" alt="bookcover">`
@@ -85,7 +83,7 @@ export function bookCard(obj, grade) {
         <h3>${title}</h3>
         <p class="author">by ${author}</p>
         <span class="grade">
-            <div class="star"  value="1"><i class="fa-solid fa-star ${1 <= grade ? "color" : ""}"></i></div>
+            <div class="star" value="1"><i class="fa-solid fa-star ${1 <= grade ? "color" : ""}"></i></div>
             <div class="star" value="2"><i class="fa-solid fa-star ${2 <= grade ? "color" : ""}"></i></div>
             <div class="star" value="3"><i class="fa-solid fa-star ${3 <= grade ? "color" : ""}"></i></div>
             <div class="star" value="4"><i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i></div>
@@ -113,22 +111,6 @@ export function bookCard(obj, grade) {
 
     document.querySelector(".bookContainer").append(card)
 
-    setRatingStars(card)
+    setRatingStars(card, obj.id)
 }
 
-
-function setRatingStars(card) {
-    let stars = card.querySelectorAll(".star")
-    console.log(stars)
-    stars.forEach(star => {
-        console.log(star)
-        star.addEventListener("click", (e) => {
-            getValue(e)
-        })
-    })
-}
-
-function getValue(e) {
-    let targ = e.target
-    console.log("ho ho", targ.getAttribute('value'))
-}

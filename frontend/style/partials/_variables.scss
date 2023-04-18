@@ -18,11 +18,21 @@ div.hidden {
 }
 
 .p-1 {
-    padding: 0 1rem;
+    margin: 0 1rem;
 }
 
 .flex{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+
+.flex-1{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    // @media ($md){
+    //     justify-content: flex-start;
+
+    // }
 }

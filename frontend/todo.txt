@@ -1,11 +1,10 @@
 TODO
 
 (G)
-- fix grading system
+- fix grading system on my page?
 
 
 (VG)
-- list with all the rated books
 - make list sortable by name, name of author, grade (from highest down)
 
 

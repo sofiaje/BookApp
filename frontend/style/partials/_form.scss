@@ -42,3 +42,15 @@ label{
     color: var(--text-color);
     margin-bottom: 0.5rem;
 }
+
+#sortBy {
+    padding: 0 0.5rem;
+    border-radius: 4px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    @media ($md){
+        margin: 0 3rem;
+
+    }
+}

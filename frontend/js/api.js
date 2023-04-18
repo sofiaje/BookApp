@@ -19,6 +19,7 @@ export async function getData(url) {
 }
 
 
+
 // create relations between user and book, api
 export async function changeApi(id, user) {
     let res = await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
@@ -61,6 +62,5 @@ export async function loginApi(user, passw) {
     } catch (error) {
         console.log(error)
         errorText.innerText = `${error.response.data?.error.message}`
-        // return false
     }
 }

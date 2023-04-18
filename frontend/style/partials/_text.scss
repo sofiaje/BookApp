@@ -4,7 +4,6 @@ h1,h2,h3,h4,h5 {
     color: var(--heading-color);
 }
 
-
 * {
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -52,16 +51,3 @@ a {
 }
 
 
-
-//------------------- star grading -------------------
-
-.author {
-    color: var(--author);
-}
-.grade {
-    color: var(--star-grade-light);
-    // cursor: pointer;
-}
-.color {
-    color: var(--star-grade-dark);
-}
