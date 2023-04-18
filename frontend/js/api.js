@@ -1,5 +1,3 @@
-// fetch data from api 
-
 //get info, public
 export async function getInfo(url) {
     let res = await axios.get(`${url}`)
@@ -19,7 +17,6 @@ export async function getData(url) {
 }
 
 
-
 // create relations between user and book, api
 export async function changeApi(id, user) {
     let res = await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
@@ -33,6 +30,8 @@ export async function changeApi(id, user) {
 }
 
 
+
+// ------------------------------------------- login/register ----------------------------------------------------
 
 // function to register as new user, api
 export async function registerUserApi(user, email, passw) {
@@ -64,3 +63,22 @@ export async function loginApi(user, passw) {
         errorText.innerText = `${error.response.data?.error.message}`
     }
 }
+
+
+// ------------------------------------------- grades ----------------------------------------------------
+
+// update average grade
+export async function updateGrade(grade, id) {
+    await axios.put(`http://localhost:1337/api/books/${id}`, {
+        data: {
+            sumGrade: grade
+        }
+    },
+    {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+        }
+    })
+}
+
+

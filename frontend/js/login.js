@@ -115,6 +115,7 @@ export function logout() {
 }
 
 
+
 // function that saves userdata in localstorage or sessionstorage depending on checkbox-status
 export function signedIn(data) {
     const remember = document.getElementById("remember")

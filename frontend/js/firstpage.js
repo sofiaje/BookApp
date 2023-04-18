@@ -4,6 +4,7 @@ import { loginpage } from "./login.js"
 import { getInfo } from "./api.js"
 import { addToList, getUserInfo } from "./cards.js"
 import { setRatingStars, calcRate } from "./starRating.js"
+import { isLoggedIn } from "./storage.js"
 
 
 
@@ -20,7 +21,7 @@ export async function loadPage() {
     if (!info) { info = await getInfo("http://localhost:1337/api/first-page-info?populate=*") }
     let articleArr = info.data.attributes.article
 
-    // fetch books, everytime on page load
+    // fetch books, everytime page load
     let res = await getInfo("http://localhost:1337/api/books?populate=*");
     allBooks = res.data
     console.log(allBooks)
@@ -44,15 +45,19 @@ export async function loadPage() {
     // render articles on first page
     articleArr.forEach(x => { renderArticles(x.title, x.body)})
 
+    // for each book, calculate avrage grade and display on first page
     allBooks.forEach((book, i)=> {
         let grades = book.attributes.review.data.map(x => x.attributes.grade)
         let grade = calcRate(grades)
+        // console.log(book)
         bookCard(book, grade)
     });
     
     document.getElementById("startBtn").addEventListener("click", loginpage)
 
-    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
+
+    // if user is logged in, set username, change nav, hide first page info
+    if (isLoggedIn()) {
         changeNav()
         setUsername()
         document.querySelector(".firstpageContainer").classList.add("hidden")
@@ -62,11 +67,13 @@ export async function loadPage() {
 
 
 
+// render article on first page
 function renderArticles(title, body) {
     let article = document.createElement("article")
     article.innerHTML = `<h2>${title}</h2><p>${body}</p>`
     document.querySelector(".firstpageInfo").append(article)
 }
+
 
 
 
@@ -108,9 +115,9 @@ export function bookCard(obj, grade) {
             loginpage()
         }
     })
-
+    
     document.querySelector(".bookContainer").append(card)
-
+    
     setRatingStars(card, obj.id)
 }
 

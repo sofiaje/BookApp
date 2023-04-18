@@ -5,7 +5,8 @@ TODO
 
 
 (VG)
-- make list sortable by name, name of author, grade (from highest down)
+- make list sortable by grade (from highest down)
+
 
 
 
@@ -27,7 +28,6 @@ Hur har din erfarenhet varit med att jobba med Strapi i detta projekt?
 -------------------------------------------------------------------------
 Questions / notes
 
-- Tab order on page ( navigation )
 - Filling text on login-page
 - Filling text on profile-page
 - Flex mixins or framework ?

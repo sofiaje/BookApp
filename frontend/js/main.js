@@ -32,7 +32,7 @@ document.getElementById("mypageBtn").addEventListener("click", renderMyPage)
 getColorScheme()
 
 
-// calls page load on.. page load
+// calls pageLoad on.. page load
 loadPage()
 
 

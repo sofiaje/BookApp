@@ -1,8 +1,9 @@
-import { getData } from "./api.js"
+import { getData, updateGrade } from "./api.js"
 import { changeNav } from "./nav.js"
 import { removeBook } from "./cards.js"
 import { getUserInfo } from "./cards.js"
 import { calcRate } from "./starRating.js"
+import { sortRatedList, ratedList } from "./sortBy.js"
 
 
 
@@ -32,19 +33,19 @@ export async function renderMyPage() {
     </div>
     <div id="gradedWrapper" class="bookContainer"></div>`
     
-    
     if (me.books.length > 0) {
         me.books.forEach(book => {
             let btn = deleteFromReadingListBtn(removeBook, book)
             let grades = book.review.map(x => x.grade)
             let grade = calcRate(grades)
+
             renderReadList(book, grade, "#readinglistWrapper", btn)
         })
     } else {
-        document.querySelector(".bookContainer").innerHTML = "<p>No books here! Add books by pressing the bookmark next to the book you like on the home page.</p>"
+        document.querySelector("#readinglistWrapper").innerHTML = "<p>No books on the reading list</p>"
     }
 
-    ratedList(me.grades)
+    (me.grades.length > 0) ? ratedList(me.grades) : document.querySelector("#gradedWrapper").innerHTML = "<p>No rated books yet</p>" 
     
     document.getElementById("sortBy").addEventListener("change", (e) => {
         document.querySelector("#gradedWrapper").innerHTML = ""
@@ -54,54 +55,6 @@ export async function renderMyPage() {
 }
 
 
-
-function sortRatedList(obj, value) {
-    if (value === "author") {
-        let sortedObj = [...obj].sort(sortByAuth)
-        return sortedObj
-    } else if(value === "title") {
-        let sortedObj = [...obj].sort(sortByTitle)
-        return sortedObj
-    }
-    return obj
-}
-
-
-
-// sort by author
-function sortByAuth(a,b) {
-    if ( a.book.author < b.book.author ){
-      return -1;
-    }
-    if ( a.book.author > b.book.author ){
-      return 1;
-    }
-    return 0;
-}
-
-
-// sort by title 
-function sortByTitle(a,b) {
-    if ( a.book.title < b.book.title ){
-      return -1;
-    }
-    if ( a.book.title > b.book.title ){
-      return 1;
-    }
-    return 0;
-}
-
-
-
-async function ratedList(obj) {
-    if (obj.length > 0) {
-        obj.forEach(book => {
-            let grades = book.book.review.map(x => x.grade)
-            let grade = calcRate(grades)
-            renderReadList(book.book, grade, "#gradedWrapper")
-        })
-    } 
-}
 
 
 

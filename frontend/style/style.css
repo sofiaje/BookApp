@@ -38,6 +38,7 @@ div.hidden {
   --btn: rgb(244, 244, 244);
   --modal-bg: rgb(101, 94, 89);
   --modal-text: white;
+  --p-white: white;
 }
 
 .dark {
@@ -110,6 +111,10 @@ a {
 #user {
   text-align: right;
   padding: 0.5rem;
+}
+
+a {
+  text-decoration: none;
 }
 
 .navLink {
@@ -302,8 +307,8 @@ header .container {
 
 footer {
   padding: 1rem;
-  color: var(--p-white);
   background-color: var(--footer-color);
+  color: var(--p-white);
 }
 
 .bookContainer {

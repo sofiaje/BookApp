@@ -14,17 +14,13 @@ export async function getUserInfo() {
 export async function addToList(id) {
     if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
 
-        let res = await axios.get("http://localhost:1337/api/users/me?populate=deep", {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
-            }
-        })
+        let data = await getData("http://localhost:1337/api/users/me?populate=deep")
         
-        let arr = res.data.books
+        let arr = data.books
         arr = arr.map(x => x.id)
 
         arr.push(id)
-        changeApi(arr, res.data.id)
+        changeApi(arr, data.id)
         modal()
         
         return true
@@ -36,23 +32,10 @@ export async function addToList(id) {
 
 
 export async function removeBook(id) {
-    let res = await axios.get("http://localhost:1337/api/users/me?populate=deep", {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
-            }
-    })
-    let arr = res.data.books
+    let data = await getData("http://localhost:1337/api/users/me?populate=deep")
+
+    let arr = data.books
     arr = arr.filter(x => x.id !== id)
-    changeApi(arr, res.data.id)
+    changeApi(arr, data.id)
     renderMyPage()
-}
-
-
-
-
-
-// ------------------------------------------------ static test ------------------------------------------------
-
-async function getColorScheme() {
-    let res = await axios.get("http://localhost:1337/api/colorscheme")
 }
