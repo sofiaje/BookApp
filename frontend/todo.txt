@@ -1,11 +1,5 @@
 TODO
 
-(G)
-
-
-
-(VG)
-
 
 
 
@@ -28,7 +22,7 @@ Hur har din erfarenhet varit med att jobba med Strapi i detta projekt?
 Questions / notes
 
 Fix: 
-- Decimal
+
 
 Next strep:
 - Filling text on login-page
