@@ -20,7 +20,10 @@ header{
     nav {
         display: flex;
         align-items: baseline;
-        gap: 1.5rem;
+        gap: 1rem;
+        @media($sm){
+            gap: 1.5rem;
+        }
     }
     .container {
         max-width: 1400px;
@@ -55,10 +58,11 @@ header{
     flex-direction: column;
     align-items: center;
     margin-bottom: 4rem;
+    font-size: 1.1rem;
     
     @media ($md) {
         gap: 2rem;
-        font-size: 1.2rem;
+        font-size: 1.16rem;
     }
     @media($lg) {
         flex-direction: row;

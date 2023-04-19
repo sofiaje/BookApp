@@ -1,11 +1,17 @@
 h1,h2,h3,h4,h5 {
+    // font-family: 'Roboto', sans-serif;
     font-family: 'Cormorant Garamond', serif;
+    font-weight: 200;
     padding: 0.5em 0 0 0;
     color: var(--heading-color);
 }
 
 * {
+    // font-family: 'Cormorant Garamond', serif;
+    // font-family: 'Crimson Pro', serif;
     font-family: 'Source Sans Pro', sans-serif;
+
+    // font-weight: 200;
 }
 
 p {
@@ -15,7 +21,31 @@ p {
 
 a {
     color: var(--text-color);
+    text-decoration: none;
 }
+
+//------------------- header navigation -------------------
+
+.navLink {
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+    font-weight: 100;
+    border-bottom: 1px solid white;
+    font-family: 'Roboto', sans-serif;
+    @media ($sm){
+        font-size: 0.9rem;
+    }
+
+    &:hover {
+        // font-weight:bolder;
+        border-color: black;
+        // text-decoration: underline;
+        // text-underline-position: under;
+    }
+}
+
+
 
 .bigText {
     width: 50%;
@@ -35,7 +65,7 @@ a {
 
 // error log in /register
 #errorText {
-    color: red;
+    color: var(--error-text);
 }
 
 
@@ -43,6 +73,8 @@ a {
 #userInfo {
     color: var(--user-info);
     padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 #user {

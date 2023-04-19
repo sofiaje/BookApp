@@ -1,5 +1,5 @@
 import { changeApi, getData } from "./api.js"
-import { modal } from "./modal.js"
+import { modal, modalLogin } from "./modal.js"
 import { renderMyPage } from "./mypage.js"
 import { isLoggedIn } from "./storage.js"
 
@@ -25,7 +25,7 @@ export async function addToList(id) {
         
         return true
     } else {
-        alert("du behöver vara medlem för att kunna lägga till bok")
+        modalLogin()
         return false
     }
 }

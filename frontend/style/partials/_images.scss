@@ -1,5 +1,10 @@
 .bookThumbnail{
-    max-width: 150px;
+    align-self: flex-start;
+    max-width: 130px;
+    
+    @media($sm){
+        max-width: 150px;
+    }
 }
 
 .bigImg{

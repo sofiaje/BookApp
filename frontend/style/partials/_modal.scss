@@ -1,13 +1,58 @@
-.modal {
+div.modal {
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: auto;
-    padding: 3rem;
-    border-radius: 50%;
-
+    
     background-color: var(--modal-bg);
     color: var(--modal-text);
+}
+
+div.round {
+    padding: 3rem;
+    border-radius: 50%;
+}
+
+div.square {
+    max-width: 450px;
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    p, h2 {
+        padding: 0.5rem 0;
+        color: black;
+    }
+    button {
+        margin: 0.5rem;
+        align-self: flex-end;
+    }
+    #loginModalBtn{
+        margin: 2rem 0 1rem 0;
+        &:hover {
+            box-shadow: 0 0 10px 5px var(--shadow-light);
+        }
+    }
+}
+
+.modalText{
+    padding: 0.5rem;
+    @media ($sm){
+        padding: 0 2rem 1rem 2rem;
+    }
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+    z-index: 1;
+
 }

@@ -59,8 +59,6 @@ export async function renderMyPage() {
 
 
 
-
-
 export function renderReadList(obj, grade, elem, btn) {
     let { title, author, pages, releaseDate, coverImg } = obj
     
@@ -93,7 +91,6 @@ export function renderReadList(obj, grade, elem, btn) {
     if (btn) { card.append(btn) }
     document.querySelector(elem).append(card)
 }
-
 
 
 function deleteFromReadingListBtn(func, obj) {

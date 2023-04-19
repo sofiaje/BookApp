@@ -1,6 +1,6 @@
 import { getUserInfo } from "./cards.js"
 import { loadPage } from "./firstpage.js"
-import { modal } from "./modal.js"
+import { modal, modalLogin } from "./modal.js"
 
 
 
@@ -39,7 +39,7 @@ export async function createGrade(grade, bookId) {
         loadPage()
         modal()
     } else {
-        alert("du behöver vara medlem för att kunna betygsätta böcker")
+        modalLogin()
     }
     
 }

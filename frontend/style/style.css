@@ -10,6 +10,15 @@ div.hidden {
   margin: 0 1rem;
 }
 
+.p-3 {
+  margin: 3rem;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
@@ -31,6 +40,7 @@ div.hidden {
   --shadow-light: rgba(221, 221, 221, 0.731);
   --shadow-dark: rgb(213, 213, 213);
   --user-info: rgb(215, 215, 215);
+  --error-text: rgb(255, 43, 43);
   --star-grade-light: rgb(199, 199, 199);
   --star-grade-dark: rgb(98, 91, 83);
   --author: grey;
@@ -43,20 +53,17 @@ div.hidden {
 
 .dark {
   --bg-color: rgb(38, 56, 43);
-  --bg-color: rgb(30, 43, 33);
   --footer-color: rgb(14, 21, 16);
-  --text-color: rgb(187, 199, 190);
   --text-color: rgb(181, 190, 182);
   --heading-color: rgb(226, 233, 228);
   --shadow-light: rgb(53, 80, 61);
-  --shadow-dark: rgb(31, 43, 34);
-  --shadow-dark: rgb(17, 25, 19);
+  --shadow-dark: rgb(27, 37, 29);
   --user-info: rgb(94, 121, 102);
+  --error-text: rgb(255, 145, 145);
   --star-grade-light: rgb(94, 121, 102);
   --star-grade-dark: rgb(231, 239, 233);
   --author: rgb(187, 199, 190);
-  --card-border:rgb(94, 121, 102);
-  --card-border:rgb(60, 82, 67);
+  --card-border:rgb(71, 95, 79);
   --modal-bg: rgb(60, 82, 67);
 }
 .dark img {
@@ -65,6 +72,7 @@ div.hidden {
 
 h1, h2, h3, h4, h5 {
   font-family: "Cormorant Garamond", serif;
+  font-weight: 200;
   padding: 0.5em 0 0 0;
   color: var(--heading-color);
 }
@@ -80,6 +88,24 @@ p {
 
 a {
   color: var(--text-color);
+  text-decoration: none;
+}
+
+.navLink {
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  font-weight: 100;
+  border-bottom: 1px solid white;
+  font-family: "Roboto", sans-serif;
+}
+@media (width >= 576px) {
+  .navLink {
+    font-size: 0.9rem;
+  }
+}
+.navLink:hover {
+  border-color: black;
 }
 
 .bigText {
@@ -100,30 +126,19 @@ a {
 }
 
 #errorText {
-  color: red;
+  color: var(--error-text);
 }
 
 #userInfo {
   color: var(--user-info);
   padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 #user {
   text-align: right;
   padding: 0.5rem;
-}
-
-a {
-  text-decoration: none;
-}
-
-.navLink {
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-.navLink:hover {
-  font-weight: bolder;
-  border-bottom: 1px solid;
 }
 
 input {
@@ -155,14 +170,16 @@ label {
 }
 
 #sortBy {
+  background-color: var(--transparent);
+  color: var(--text-color);
   padding: 0 0.5rem;
   border-radius: 4px;
   border: none;
-  font-size: 1.1rem;
   font-weight: 600;
 }
 @media (width >= 768px) {
   #sortBy {
+    font-size: 1.1rem;
     margin: 0 3rem;
   }
 }
@@ -211,7 +228,13 @@ button {
 }
 
 .bookThumbnail {
-  max-width: 150px;
+  align-self: flex-start;
+  max-width: 130px;
+}
+@media (width >= 576px) {
+  .bookThumbnail {
+    max-width: 150px;
+  }
 }
 
 .bigImg {
@@ -244,7 +267,12 @@ header {
 header nav {
   display: flex;
   align-items: baseline;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+@media (width >= 576px) {
+  header nav {
+    gap: 1.5rem;
+  }
 }
 header .container {
   max-width: 1400px;
@@ -274,11 +302,12 @@ header .container {
   flex-direction: column;
   align-items: center;
   margin-bottom: 4rem;
+  font-size: 1.1rem;
 }
 @media (width >= 768px) {
   .firstpageInfo {
     gap: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.16rem;
   }
 }
 @media (width >= 992px) {
@@ -344,17 +373,64 @@ footer {
   }
 }
 
-.modal {
+div.modal {
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  padding: 3rem;
-  border-radius: 50%;
   background-color: var(--modal-bg);
   color: var(--modal-text);
+}
+
+div.round {
+  padding: 3rem;
+  border-radius: 50%;
+}
+
+div.square {
+  max-width: 450px;
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+div.square p, div.square h2 {
+  padding: 0.5rem 0;
+  color: black;
+}
+div.square button {
+  margin: 0.5rem;
+  align-self: flex-end;
+}
+div.square #loginModalBtn {
+  margin: 2rem 0 1rem 0;
+}
+div.square #loginModalBtn:hover {
+  box-shadow: 0 0 10px 5px var(--shadow-light);
+}
+
+.modalText {
+  padding: 0.5rem;
+}
+@media (width >= 576px) {
+  .modalText {
+    padding: 0 2rem 1rem 2rem;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  z-index: 1;
 }
 
 i, path, svg {

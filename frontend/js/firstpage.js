@@ -24,7 +24,7 @@ export async function loadPage() {
     // fetch books, everytime page load
     let res = await getInfo("http://localhost:1337/api/books?populate=*");
     allBooks = res.data
-    console.log(allBooks)
+    // console.log(allBooks)
 
     // display info first page
     contentWrapper.innerHTML = `
@@ -43,15 +43,15 @@ export async function loadPage() {
     </div>`
 
     // render articles on first page
-    articleArr.forEach(x => { renderArticles(x.title, x.body)})
+    articleArr.forEach(x => { renderArticles(x.title, x.body) })
 
     // for each book, calculate avrage grade and display on first page
-    allBooks.forEach((book, i)=> {
+    allBooks.forEach((book, i) => {
         let grades = book.attributes.review.data.map(x => x.attributes.grade)
         let grade = calcRate(grades)
         bookCard(book, grade)
     });
-    
+
     document.getElementById("startBtn").addEventListener("click", loginpage)
 
 
@@ -95,7 +95,7 @@ export function bookCard(obj, grade) {
             <div class="star" value="4"><i class="fa-solid fa-star ${4 <= grade ? "color" : ""}"></i></div>
             <div class="star" value="5"><i class="fa-solid fa-star ${5 <= grade ? "color" : ""}"></i></div>
         </span>
-        <span class="color">${grade === null ? "" :  grade} </span>
+        <span class="color">${grade === null ? "" : grade} </span>
         <br><br>
         <p>Pages: ${pages}<br>
         Relese date: ${releaseDate}</p>
@@ -109,14 +109,11 @@ export function bookCard(obj, grade) {
 
 
     btn.addEventListener("click", async () => {
-        let loggedin = await addToList(obj.id)
-        if (!loggedin) {
-            loginpage()
-        }
+        await addToList(obj.id)
     })
-    
+
     document.querySelector(".bookContainer").append(card)
-    
+
     setRatingStars(card, obj.id)
 }
 

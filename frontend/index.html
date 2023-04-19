@@ -17,9 +17,9 @@
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Oswald:wght@300;400;500;600&family=Playfair+Display:wght@400;500&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-    
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Crimson+Pro:wght@200;300&family=Crimson+Text&family=Roboto:wght@300;400;500&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div id="pagewrapper">
@@ -39,7 +39,16 @@
             <p id="userInfo"></p>
         </div>
 
-        <div class="modal hidden"><i class="fa-solid fa-check fa-2xl"></i></div>
+        <div id="checkModal" class="modal round hidden"><i class="fa-solid fa-check fa-2xl"></i></div>
+        <div id="loginModal" class="modal square flex-col hidden">
+            <button id="closeModal" class="invisible"><i class="fa-solid fa-xmark fa-xl"></i></button>
+            <div class="modalText">
+                <h2>Not yet a member?</h2>
+                <p>To be able to rate books and add them to a reading list, you need to be a logged in member.</p>
+                <button id="loginModalBtn" style="align-self: flex-end" class="btn">Log in or register</button>
+            </div>
+        </div>
+        <div class="overlay hidden"></div>
         <main id="contentWrapper"></main>
 
         <footer>
