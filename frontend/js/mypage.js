@@ -8,7 +8,6 @@ import { sortRatedList, ratedList } from "./sortBy.js"
 // render my page
 export async function renderMyPage() {
     let me = await getUserInfo()
-    console.log(me)
     setUsername()
     changeNav()
     

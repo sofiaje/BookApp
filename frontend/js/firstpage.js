@@ -55,7 +55,6 @@ export async function loadPage() {
     // fetch books, everytime page load
     let res = await getInfo("http://localhost:1337/api/books?populate=*");
     allBooks = res.data
-    console.log(allBooks)
 
 
     // for each book, calculate avrage grade and display on first page
