@@ -26,6 +26,8 @@ document.getElementById("logoutBtn").addEventListener("click", logout)
 document.getElementById("mypageBtn").addEventListener("click", renderMyPage)
 
 
+// ----------------------------------------------------------------------------
+
 
 //get color scheme
 getColorScheme()

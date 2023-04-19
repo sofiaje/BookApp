@@ -6,7 +6,6 @@
 
 #contentWrapper{
     flex-grow: 1;
-    // padding: 1rem 1rem;
     max-width: 1300px;
     width: 100%;
     margin-inline: auto;
@@ -18,8 +17,8 @@ header{
     box-shadow: 0 0 10px 5px var(--shadow-dark);
 
     nav {
-        display: flex;
-        align-items: baseline;
+        @include flex($align: baseline);
+
         gap: 1rem;
         @media($sm){
             gap: 1.5rem;
@@ -38,13 +37,9 @@ header{
 // ------------------- first page -------------------
 
 .firstpageContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    @include flex($direction: column, $align:center);
     margin-bottom: 2rem;
     @media ($md){
-        // margin:1rem;
         margin-bottom: 4rem;
 
     }
@@ -54,9 +49,8 @@ header{
 }
 
 .firstpageInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex($direction: column, $align:center);
+
     margin-bottom: 4rem;
     font-size: 1.1rem;
     
@@ -65,10 +59,8 @@ header{
         font-size: 1.16rem;
     }
     @media($lg) {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: flex-start;
+        @include flex($justify: space-between, $wrap: wrap);
+
     }
     article {
         max-width: 600px;
@@ -115,10 +107,8 @@ footer {
     .text {
         width: 100%;
         padding-left: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
+        @include flex($direction: column, $justify: space-between);
+
     }
     @media ($md){
         width: 45%;
@@ -126,4 +116,8 @@ footer {
     @media ($xl) {
         width: 30%;
     }
+}
+
+.testFlex {
+    @include flex();
 }

@@ -1,5 +1,5 @@
 i, path, svg {
-    pointer-events: none
+    pointer-events: none;
 }
 
 
@@ -14,5 +14,7 @@ i, path, svg {
 }
 .star {
     display: inline-block;
+}
+.point {
     cursor: pointer;
 }

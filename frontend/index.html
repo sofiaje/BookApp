@@ -26,7 +26,6 @@
         <header>
             <div class="flex container">
                 <h1><i class="fa-solid fa-book-open"></i> LitRate</h1>
-                <button class="gradeBtn btn hidden" value="2">Grade</button>
                 <nav>
                     <a class="navLink" href="#" id="homeBtn">HOME</a>
                     <a class="navLink" href="#" id="loginBtn"> SIGN IN / REGISTER</a>
@@ -39,13 +38,14 @@
             <p id="userInfo"></p>
         </div>
 
+
         <div id="checkModal" class="modal round hidden"><i class="fa-solid fa-check fa-2xl"></i></div>
         <div id="loginModal" class="modal square flex-col hidden">
             <button id="closeModal" class="invisible"><i class="fa-solid fa-xmark fa-xl"></i></button>
             <div class="modalText">
                 <h2>Not yet a member?</h2>
                 <p>To be able to rate books and add them to a reading list, you need to be a logged in member.</p>
-                <button id="loginModalBtn" style="align-self: flex-end" class="btn">Log in or register</button>
+                <button id="loginModalBtn" class="btn">Log in or register</button>
             </div>
         </div>
         <div class="overlay hidden"></div>

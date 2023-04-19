@@ -6,9 +6,16 @@ $lg: "width >= 992px";
 $xl: "width >= 1200px";
 
 
+@mixin flex($direction: row, $justify: flex-start, $align: flex-start, $wrap: no-wrap){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+}
 
 
-// reusable classes
+// ---------------------- reusable classes ----------------------
 
 .hidden {
     display: none;
@@ -20,26 +27,11 @@ div.hidden {
 .p-1 {
     margin: 0 1rem;
 }
-.p-3 {
-    margin: 3rem;
-}
 
 .flex-col {
-    display: flex;
-    flex-direction: column;
+    @include flex($direction:column);
 }
+
 .flex{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.flex-1{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    // @media ($md){
-    //     justify-content: flex-start;
-
-    // }
+    @include flex($justify: space-between, $align: baseline);
 }

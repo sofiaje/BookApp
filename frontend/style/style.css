@@ -10,25 +10,20 @@ div.hidden {
   margin: 0 1rem;
 }
 
-.p-3 {
-  margin: 3rem;
-}
-
 .flex-col {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: no-wrap;
 }
 
 .flex {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-}
-
-.flex-1 {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  flex-wrap: no-wrap;
 }
 
 :root {
@@ -96,16 +91,16 @@ a {
   padding: 0.5rem 0;
   font-size: 0.8rem;
   font-weight: 100;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--bg-color);
   font-family: "Roboto", sans-serif;
 }
 @media (width >= 576px) {
   .navLink {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
 .navLink:hover {
-  border-color: black;
+  border-color: var(--text-color);
 }
 
 .bigText {
@@ -266,7 +261,10 @@ header {
 }
 header nav {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: baseline;
+  flex-wrap: no-wrap;
   gap: 1rem;
 }
 @media (width >= 576px) {
@@ -282,8 +280,9 @@ header .container {
 .firstpageContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: no-wrap;
   margin-bottom: 2rem;
 }
 @media (width >= 768px) {
@@ -300,7 +299,9 @@ header .container {
 .firstpageInfo {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: no-wrap;
   margin-bottom: 4rem;
   font-size: 1.1rem;
 }
@@ -312,10 +313,11 @@ header .container {
 }
 @media (width >= 992px) {
   .firstpageInfo {
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
   }
 }
 .firstpageInfo article {
@@ -361,6 +363,7 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: no-wrap;
 }
 @media (width >= 768px) {
   .card {
@@ -371,6 +374,14 @@ footer {
   .card {
     width: 30%;
   }
+}
+
+.testFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: no-wrap;
 }
 
 div.modal {
@@ -390,18 +401,18 @@ div.round {
 }
 
 div.square {
-  max-width: 450px;
+  max-width: 400px;
   padding: 0.5rem;
-  background-color: white;
-  border: 1px solid black;
+  background-color: var(--bg-color);
+  border: 1px solid var(--text-color);
   border-radius: 4px;
 }
 div.square p, div.square h2 {
   padding: 0.5rem 0;
-  color: black;
+  color: var(--text-color);
 }
 div.square button {
-  margin: 0.5rem;
+  padding: 0.5rem;
   align-self: flex-end;
 }
 div.square #loginModalBtn {
@@ -451,6 +462,9 @@ i, path, svg {
 
 .star {
   display: inline-block;
+}
+
+.point {
   cursor: pointer;
 }
 

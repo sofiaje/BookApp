@@ -1,5 +1,6 @@
 import { getToken } from "./storage.js"
 
+
 //get info, public
 export async function getInfo(url) {
     let res = await axios.get(`${url}`)
@@ -17,20 +18,6 @@ export async function getData(url) {
     })
     return res.data
 }
-
-
-// create relations between user and book, api
-export async function changeApi(id, user) {
-    await axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
-        books: id 
-    },
-        {
-            headers: {
-                Authorization: `Bearer ${getToken()}`
-            }
-        })
-}
-
 
 
 // ------------------------------------------- login/register ----------------------------------------------------
@@ -71,7 +58,7 @@ export async function loginApi(user, passw) {
 
 // update average grade
 export async function updateGrade(grade, id) {
-    let res = await axios.put(`http://localhost:1337/api/books/${id}`, {
+    axios.put(`http://localhost:1337/api/books/${id}`, {
         data: {
             sumGrade: grade
         }
@@ -83,4 +70,44 @@ export async function updateGrade(grade, id) {
     })
 }
 
+
+// create new review
+export async function addGradeAPI(grade, bookId) {
+    try {
+        let me = await getData("http://localhost:1337/api/users/me?populate=deep")
+            axios.post(`http://localhost:1337/api/grades`, {
+            data: {
+                grade: grade,
+                users: me.id,
+                book: bookId
+                }
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
+            }
+                })
+            
+        return true
+    }
+    catch (error) {
+        console.log(error)
+        return false
+    }
+
+}
+
+// ------------------------------------------- reading list ----------------------------------------------------
+
+// create relations between user and book, api
+export async function changeApi(id, user) {
+    axios.put(`http://localhost:1337/api/users/${user}?populate=*`, {
+        books: id 
+    },
+        {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
+}
 

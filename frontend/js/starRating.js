@@ -1,6 +1,6 @@
-import { getUserInfo } from "./cards.js"
 import { loadPage } from "./firstpage.js"
 import { modal, modalLogin } from "./modal.js"
+import { addGradeAPI } from "./api.js"
 
 
 
@@ -10,39 +10,21 @@ import { modal, modalLogin } from "./modal.js"
 export function setRatingStars(card, id) {
     let stars = card.querySelectorAll(".star")
     stars.forEach(star => {
-        star.addEventListener("click", (e) => {
-            createGrade(Number(e.target.getAttribute('value')), id)
+        star.addEventListener("click", async (e) => {
+            if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
+                let worked = await addGradeAPI(Number(e.target.getAttribute('value')), id)
+                if (worked) {
+                    loadPage()
+                    modal()
+                }
+            } else {
+                modalLogin()
+            }
         })
     })
 }
 
 
-// create new review
-// lägg i api.js senare
-export async function createGrade(grade, bookId) {
-    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
-        let me = await getUserInfo()
-        await axios.post(`http://localhost:1337/api/grades`, {
-        data: {
-            grade: grade,
-            users: me.id,
-            book: bookId
-            }
-    },
-    {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwt") ? sessionStorage.getItem("jwt") : localStorage.getItem("jwt")}`
-        }
-            })
-        
-        // updateGrade(grade, id)
-        loadPage()
-        modal()
-    } else {
-        modalLogin()
-    }
-    
-}
 
 // calculate average grade
 export function calcRate(arr) {

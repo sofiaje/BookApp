@@ -7,6 +7,8 @@ let errorText, inputName, passw, inputNameReg, emailReg, passwReg
 
 // ------------------------------ login  ------------------------------------
 
+
+// load login page
 export async function loginpage() {
     contentWrapper.innerHTML = `
     <div class="loginCont">
