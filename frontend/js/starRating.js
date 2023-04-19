@@ -55,7 +55,7 @@ export function calcRate(arr) {
         initialValue
     );
         
-    return sum / arr.length
+    return Number(sum / arr.length).toFixed(1)
 }
 
 

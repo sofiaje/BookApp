@@ -1,5 +1,5 @@
 export function isLoggedIn() {
-    if (sessionStorage.getItem("jwt") || sessionStorage.getItem("jwt")) {
+    if (sessionStorage.getItem("jwt") || localStorage.getItem("jwt")) {
         return true
     }
 }
