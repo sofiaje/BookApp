@@ -1,7 +1,8 @@
 # BookApp - LitRate
 
 ## Introduction
-Welcome to the LitRate project! This application is developed for the LitRate bookstore to manage their book inventory and provide a seamless experience for users to explore, rate, and save books.
+Welcome to the LitRate project! This application is developed for the imaginary LitRate bookstore to manage their book inventory and provide a seamless experience for users to explore, rate, and save books.
+In this project, the primary objective is to acquire knowledge and skills related to the utilization of a headless Content Management System (CMS).
 
 ## Features
 ### Admin
@@ -12,10 +13,10 @@ Welcome to the LitRate project! This application is developed for the LitRate bo
 ### Logged-Out Mode
 - Users can register and log in.
 - Users can view all books and their details available in the API.
-- 
+  
 ### Logged-In Mode
-- Logged in users have a personal profile page with their username. 
-- Logged in users have the option to log out.
+- Users have a personal profile page with their username. 
+- Users have the option to log out.
 - Users can rate books.
 - The user's profile page includes a list of all books they have rated, sortable by title, author, and rating (alphabetical for title and author, highest to lowest for rating).
 - Users can save books to a personal "To-Read" list, accessible from their profile page.
