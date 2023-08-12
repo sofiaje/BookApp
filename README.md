@@ -1,6 +1,6 @@
 # BookApp - LitRate
 
-Introduction
+## Introduction
 Welcome to the LitRate project! This application is developed for the LitRate bookstore to manage their book inventory and provide a seamless experience for users to explore, rate, and save books.
 
 ## Features
