@@ -29,3 +29,17 @@ In this project, the primary objective is to acquire knowledge and skills relate
 - HTML5
 - Sass
 - Flexbox
+
+## Preview
+
+### Landing page
+<img width="1485" alt="Skärmavbild 2023-04-20 kl  16 46 10" src="https://github.com/sofiaje/BookApp/assets/113875885/5a7666a3-e489-42d3-8cde-09ccb14084c4">
+
+### User page
+
+<img width="1463" alt="Skärmavbild 2023-04-20 kl  16 46 44" src="https://github.com/sofiaje/BookApp/assets/113875885/a8102a7a-21e2-41f2-8c70-3c8ced636589">
+
+### Mobile view
+
+<img width="483" alt="Skärmavbild 2023-04-20 kl  16 45 42" src="https://github.com/sofiaje/BookApp/assets/113875885/d38434b8-b74d-4d2d-a679-44ebfd2e864d">
+<img width="483" alt="Skärmavbild 2023-04-20 kl  16 45 31" src="https://github.com/sofiaje/BookApp/assets/113875885/72790c32-49e1-4920-85df-ca4ab337668f">
